@@ -1,0 +1,3178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>NHIREjobs is a remote job platform that connects users to international online jobs, helping them complete simple tasks and earn in USD—no experience required.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --bg:#F4F2E9; --panel:#FFFDF7; --card-dark:#FFFFFF; --card-brown:#FFF7EA;
+      --text:#0E786A; --text-dim:#607D74;
+      --accent-orange1:#F2C21A; --accent-orange2:#F4A61C;
+      --accent-green:#0D8B72; --accent-green-d:#0A6B59; --accent-red:#D68A1F;
+      --chip-amber:#F3C22B; --shadow:rgba(11,90,77,0.14);
+    }
+    html,body{height:100%;background:#F4F2E9;}
+    body{font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;margin:0;overflow:hidden;height:100svh;}
+    .text-main{color:var(--text);} .text-dim{color:var(--text-dim);}
+    .orangrad{background:linear-gradient(135deg,var(--accent-orange1),var(--accent-orange2));}
+    .ring-soft{box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 12px 24px -10px var(--shadow);}
+    .shadow-soft{box-shadow:0 20px 36px -18px var(--shadow);}
+    .grain:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+      background:repeating-linear-gradient(125deg,rgba(255,255,255,.035) 0 2px,transparent 2px 6px),
+                 radial-gradient(1200px 400px at 20% -60%,rgba(255,255,255,.06),transparent 60%),
+                 radial-gradient(800px 240px at 120% 0,rgba(255,255,255,.05),transparent 60%);
+      mix-blend-mode:overlay;opacity:.32;
+    }
+    .inner-glow:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+      background:radial-gradient(140% 120% at 50% 20%, rgba(255,140,64,.25), transparent 55%),
+                 radial-gradient(120% 140% at 50% 100%, rgba(255,90,0,.18), transparent 55%);
+    }
+    .chip{border-radius:9999px;padding:.25rem .6rem;font-weight:700;font-size:clamp(.66rem,.5rem + .4vw,.76rem);letter-spacing:.2px;}
+    .pill{border-radius:9999px;padding:.35rem .7rem;font-weight:700;font-size:clamp(.9rem,.7rem + .7vw,1.05rem);}
+    .btn{border-radius:9999px;padding:.65rem 1.1rem;font-weight:700;}
+    .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);}
+    .btn-orange{background:linear-gradient(135deg,var(--accent-orange1),var(--accent-orange2));color:#0E6156;}
+    .progress-track{height:14px;border-radius:9999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);}
+    .progress-bar{height:100%;border-radius:9999px;}
+    .selector-circle{width:30px;height:30px;border-radius:9999px;border:2px solid rgba(255,255,255,.28);display:inline-flex;align-items:center;justify-content:center;}
+    .selector-checked{background:linear-gradient(135deg,var(--accent-orange1),var(--accent-orange2));border:none;color:#0E6156;}
+    .vignette{box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 30px 40px -26px #000;}
+    .card-radius{border-radius:22px;}
+    .nav-pill{border-radius:28px;}
+    .ios-homebar{width:120px;height:6px;border-radius:9999px;background:white;opacity:.92;}
+    .tight{letter-spacing:-.6px;}
+    .container{width:100vw;height:100svh;display:grid;place-items:center;overflow:hidden;}
+    .frame{
+      width:100vw; max-width:100vw;
+      border-radius: clamp(14px, 4vw, 28px);
+      padding: clamp(10px, 3.5vw, 24px);
+      padding-top: calc(env(safe-area-inset-top) + clamp(10px, 3.5vw, 24px));
+      padding-left: calc(env(safe-area-inset-left) + clamp(10px, 3.5vw, 24px));
+      padding-right: calc(env(safe-area-inset-right) + clamp(10px, 3.5vw, 24px));
+      background: var(--panel);
+      margin: 0;
+      box-shadow: 0 25px 60px -20px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.06) inset;
+      transform-origin: top left; /* changed to eliminate subpixel right gaps */
+    }
+    * { box-sizing: border-box; }
+    .currency{font-size:clamp(24px, 4vw, 36px);} .h2{font-size:clamp(20px, 3.2vw, 28px);}
+    .coll{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease,opacity .28s ease;}
+    .coll.open{grid-template-rows:1fr;} .coll > div{overflow:hidden;}
+    .coll-fade{opacity:0;transition:opacity .28s ease;} .coll.open .coll-fade{opacity:1;}
+    .stack-gap-1{height:clamp(8px,2.2vh,18px);} .stack-gap-2{height:clamp(8px,2vh,14px);} .stack-gap-3{height:clamp(10px,2.4vh,18px);}
+    .avatar{width:42px;height:42px;border-radius:9999px;background:linear-gradient(135deg,var(--accent-orange1),var(--accent-orange2));box-shadow:0 6px 14px -8px rgba(0,0,0,.55), inset 0 0 0 2px rgba(255,255,255,.25);}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap;}
+    .topbar-right{display:flex;align-items:center;gap:.5rem;min-width:0;flex:1;justify-content:flex-end;flex-wrap:nowrap;}
+    .hours-pill{display:flex;align-items:center;gap:.35rem;padding:.28rem .5rem;border-radius:9999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);}
+    .hours-text div{white-space:nowrap;line-height:1;}
+    .badge-count{display:grid;place-items:center;width:24px;height:24px;border-radius:9999px;background:linear-gradient(135deg,var(--accent-orange1),var(--accent-orange2));color:#0E6156;font-weight:800;font-size:12px;}
+    .hamb-btn{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.08);display:grid;place-items:center;}
+
+    .job-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:12px;}
+    .job-apply-btn{font-size:14px;font-weight:600;color:#fff;background:none;border:none;padding:0;cursor:pointer;}
+    .job-see-btn{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--text-dim);background:none;border:none;padding:0;cursor:pointer;}
+    .premium-badge{
+      display:inline-flex;align-items:center;gap:15px;
+      background:linear-gradient(135deg,#FFE45C,#F2C21A,#F4A61C);
+      color:#0E6156;padding:12px 27px;border-radius:9999px;font-weight:900;
+      font-size:24px;letter-spacing:.45px;box-shadow:0 12px 24px -12px rgba(255,138,26,.75);
+      white-space:nowrap;transform-origin:center center;
+    }
+    .premium-badge-icon{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:42px;height:42px;border-radius:9999px;background:#0E6156;color:#FFE45C;
+      font-size:23px;line-height:1;
+    }
+    .most-popular-tag{display:inline-flex;align-items:center;justify-content:center;transform-origin:center center;}
+    .popular-intro-shake{
+      animation:popularTagIntroShake .9s cubic-bezier(.36,.07,.19,.97) .2s 1 both;
+      will-change:transform;
+    }
+    @keyframes popularTagIntroShake{
+      0%{transform:translateX(0) scale(.92);opacity:0;}
+      18%{transform:translateX(-3px) rotate(-4deg) scale(1);}
+      34%{transform:translateX(4px) rotate(4deg);}
+      50%{transform:translateX(-4px) rotate(-3deg);}
+      66%{transform:translateX(3px) rotate(2deg);}
+      82%{transform:translateX(-2px) rotate(-1deg);}
+      100%{transform:translateX(0) rotate(0) scale(1);opacity:1;}
+    }
+    .badge-intro-rotate{animation:badgeIntroRotate 1.15s cubic-bezier(.22,1,.36,1) 1;}
+    .badge-float{animation:premiumBadgeFloat 3.2s ease-in-out infinite;}
+    @keyframes badgeIntroRotate{
+      0%{transform:rotate(-34deg) scale(.72);opacity:0;}
+      55%{transform:rotate(14deg) scale(1.12);opacity:1;}
+      78%{transform:rotate(-7deg) scale(.97);opacity:1;}
+      100%{transform:rotate(0deg) scale(1);opacity:1;}
+    }
+    @keyframes premiumBadgeFloat{
+      0%,100%{transform:translateY(0); box-shadow:0 12px 24px -12px rgba(255,138,26,.72);}
+      50%{transform:translateY(-4px); box-shadow:0 18px 30px -14px rgba(255,138,26,.92);}
+    }
+    .hired-counter-text{
+      font-size:15px;font-weight:800;letter-spacing:.2px;
+      background:linear-gradient(135deg,#FFE45C 0%,#FFB44C 30%,#F2C21A 65%,#F4A61C 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      filter:drop-shadow(0 0 12px rgba(255,138,26,.28));
+    }
+    .hired-counter-text #hiredCounter{
+      font-size:18px;font-weight:900;
+    }
+
+    .frame{background:linear-gradient(180deg,#FFFEFA 0%,#F7F5EC 100%) !important;box-shadow:0 25px 60px -20px rgba(11,90,77,.18),0 0 0 1px rgba(14,120,106,.08) inset;}
+    body{color:var(--text);}
+    #frame .text-white{color:var(--text) !important;}
+    #frame .text-dim{color:var(--text-dim) !important;}
+    #frame [class*="text-white/"]{color:var(--text-dim) !important;}
+    #frame [class*="bg-white/"]{background:rgba(14,120,106,.06) !important;}
+    #frame [class*="border-white/"]{border-color:rgba(14,120,106,.12) !important;}
+    #frame [class*="ring-white/"]{border-color:rgba(14,120,106,.12) !important;}
+    #card1,#card2,#card3{background:linear-gradient(180deg,#FFFFFF 0%,#FAF7F0 100%) !important;border:1px solid rgba(14,120,106,.08);}
+    .hours-pill,.hamb-btn{background:rgba(14,120,106,.06) !important;border:1px solid rgba(14,120,106,.12) !important;}
+    .progress-track{background:rgba(14,120,106,.06) !important;border-color:rgba(14,120,106,.12) !important;}
+    .divider{background:linear-gradient(90deg,transparent,rgba(14,120,106,.16),transparent) !important;}
+    .job-apply-btn{color:var(--accent-green-d) !important;font-weight:700;}
+    .job-see-btn,.see-benefits{color:var(--accent-green) !important;}
+    .selector-circle{border-color:rgba(14,120,106,.24) !important;}
+    .premium-badge,.most-popular-tag,.badge-count,.btn-orange,.orangrad,.nav-pill{box-shadow:0 14px 26px -14px rgba(242,194,26,.55) !important;}
+    .premium-badge{color:#0E6156 !important;}
+    .premium-badge-icon{background:#0E6156 !important;color:#F2C21A !important;}
+    #applyOverlay,#nhirePlansModal,#paymentMethodModal,#payfacPaymentModal{background:rgba(10,94,79,.16) !important;backdrop-filter:blur(10px) !important;}
+    #applyForm,#plansModalCard,#paymentMethodModal > div,#payfacPaymentModal > div{background:linear-gradient(180deg,#FFFEFA 0%,#F7F5EC 100%) !important;color:var(--text) !important;box-shadow:0 25px 60px -20px rgba(11,90,77,.22) !important;}
+    #applyForm input{background:#FFFFFF !important;color:var(--text) !important;border:1px solid rgba(14,120,106,.14) !important;}
+    #applyForm input::placeholder{color:#5E8076 !important;opacity:1 !important;}
+    #paymentMethodModal [data-pay-method],#plansContent button[data-plan]{background:#FFFFFF !important;border:1px solid rgba(14,120,106,.10) !important;box-shadow:0 10px 20px -18px rgba(11,90,77,.25);}
+    #paymentMethodModal [data-pay-method]:hover,#plansContent button[data-plan]:hover{background:#FDF8EC !important;}
+    #paymentMethodModal [data-pay-method="bank"]{background:linear-gradient(135deg,#FFF8D8 0%,#FFF1B6 100%) !important;border-color:rgba(242,194,26,.35) !important;}
+    #paymentMethodModal [data-pay-method="bank"] .text-left div:first-child{color:#0E6156 !important;}
+    #paymentMethodModal [data-pay-method="bank"] span.w-9{background:#F2C21A !important;color:#0E6156 !important;}
+    #paymentMethodModal [data-pay-method="usdt"] span.w-9,#paymentMethodModal [data-pay-method="paypal"] span.w-9{background:#0D8B72 !important;color:#FFFEFA !important;}
+    #nhirePlansModal .text-white,#paymentMethodModal .text-white,#payfacPaymentModal .text-white{color:var(--text) !important;}
+    #nhirePlansModal [class*="text-white/"],#paymentMethodModal [class*="text-white/"],#payfacPaymentModal [class*="text-white/"]{color:var(--text-dim) !important;}
+    #paymentMethodModal .border-b,#payfacPaymentModal .border-b,#nhirePlansModal .border-b{border-color:rgba(14,120,106,.12) !important;}
+
+  
+    .verification-card{background:#FFFFFF;border:1px solid rgba(14,120,106,.12);border-radius:20px;}
+    .verification-label{color:#607D74;font-size:11px;font-weight:600;line-height:1.35;}
+    .verification-value{color:#0E786A;font-weight:800;line-height:1.35;word-break:break-word;}
+    .verification-soft{color:#607D74;}
+    .verification-details-btn{color:#0D8B72;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:6px;background:none;border:none;padding:0;cursor:pointer;}
+    .verification-details-btn svg{transition:transform .22s ease;}
+    .verification-details-btn[aria-expanded="true"] svg{transform:rotate(180deg);}
+    .verification-detail-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease,opacity .28s ease;opacity:0;}
+    .verification-detail-panel.open{grid-template-rows:1fr;opacity:1;}
+    .verification-detail-panel > div{overflow:hidden;}
+    .verification-progress-track{height:8px;border-radius:9999px;background:rgba(14,120,106,.10);overflow:hidden;}
+    .verification-progress-line{height:100%;border-radius:9999px;background:linear-gradient(90deg,var(--accent-orange1),var(--accent-orange2));animation:verificationPulse 1.8s ease-in-out infinite;}
+    .verification-progress-line.is-verified{background:linear-gradient(90deg,var(--accent-green),var(--accent-green-d));animation:none;}
+    .verification-avatar{width:42px;height:42px;border-radius:9999px;display:grid;place-items:center;font-weight:800;font-size:13px;flex:none;}
+    @keyframes verificationPulse{0%{transform:translateX(-18%);}50%{transform:translateX(0);}100%{transform:translateX(-18%);}}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <main id="frame" class="frame text-main relative">
+      <!-- Top Bar -->
+      <header class="topbar mb-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="avatar"></div>
+          <div class="text-white font-extrabold text-[clamp(15px,3vw,20px)] tight truncate">Hi, Janet!</div>
+        </div>
+        <div class="topbar-right">
+          <div class="hours-pill">
+            <div class="grid place-items-center w-7 h-7 rounded-xl bg-white/8 flex-none">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="8" width="18" height="11" rx="2" stroke="#5E8076" stroke-width="1.6"></rect>
+                <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" stroke="#5E8076" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="hours-text pr-2">
+              <div class="text-[11px] text-dim leading-none">Working</div>
+              <div class="text-[12px] font-semibold -mt-0.5">Hours</div>
+            </div>
+            <div class="badge-count">36</div>
+          </div>
+          <button class="hamb-btn" aria-label="Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="#5E8076" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Money Card -->
+      <section class="relative orangrad card-radius p-5 sm:p-6 shadow-soft vignette">
+        <div class="absolute right-0 top-0 w-[42%] h-[42%] rounded-tr-[22px] bg-[#F7E4A3] opacity-35 translate-x-2 -translate-y-2 rotate-[18deg]"></div>
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 text-[#0E6156]">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M4 7h16a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z" stroke="#0E6156" stroke-width="1.6" />
+              <circle cx="12" cy="12" r="3.2" stroke="#0E6156" stroke-width="1.6"/>
+            </svg>
+          </span>
+          <span class="font-semibold text-[13px] text-black/90">Estimated Earnings</span>
+        </div>
+        <div class="mt-2 sm:mt-3">
+          <div class="text-white currency font-extrabold tight drop-shadow-[0_2px_1px_rgba(0,0,0,.2)]">$1,996.85</div>
+        </div>
+        <button class="mt-3 inline-flex items-center gap-2 bg-white/92 text-[#0E6156] font-semibold rounded-full px-4 py-2">
+          <span class="text-[13px]">Select Working Hrs.</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0E6156" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </section>
+
+      <div class="stack-gap-1"></div>
+
+      <!-- Section Title -->
+      <div class="flex items-center justify-between">
+        <h2 class="text-white h2 font-extrabold">Available Jobs</h2>
+        <button aria-label="Close" class="w-8 h-8 rounded-lg bg-white/10 grid place-items-center">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M6 6l12 12M18 6 6 18" stroke="#5E8076" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="stack-gap-2"></div>
+
+      <div class="courses-scroll">
+      <!-- Card 1 -->
+      <article id="card1" data-key="DATA" class="relative bg-[#FFFFFF] grain card-radius p-4 sm:p-5 ring-soft shadow-soft text-main">
+        <div class="flex items-start gap-3">
+          <div class="selector-circle shrink-0"></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3">
+              <div class="pill bg-[#ff8a1a1a] text-[#0E6156] ring-1 ring-white/15 orangrad-hr" style="font-size:clamp(1rem,.9rem + .6vw,1.2rem); font-weight:800; padding:.5rem .95rem; box-shadow:0 0 0 1px rgba(255,255,255,.12), 0 10px 20px -12px rgba(255,138,26,.9);">Health Survey</div>
+              <div class="text-right">
+                <div class="text-dim text-sm leading-tight">Job offer:</div>
+                <div class="text-[clamp(18px,3.4vw,22px)] font-extrabold text-white tight">$1.08/hr</div>
+              </div>
+            </div>
+            <div class="mt-3 text-sm text-dim">Workers needed</div>
+            <div class="mt-2">
+              <div class="progress-track relative">
+                <div id="jobProgress1" class="progress-bar" style="width:78%; background:linear-gradient(90deg,var(--accent-green),var(--accent-green-d)); box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);"></div>
+                <span id="jobCount1" data-current="451" data-max="518" class="absolute -top-3 left-[62%] translate-x-0 chip text-[10.5px]" style="background:linear-gradient(90deg,var(--accent-green),var(--accent-green-d)); color:#0b2213; border:1px solid rgba(0,0,0,.15);">451/518</span>
+              </div>
+            </div>
+            <div class="job-actions">
+              <button class="job-apply-btn">Apply Now</button>
+              <button class="job-see-btn see-btn" data-target="#benefits1">
+                <span>See details</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#5E8076" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div id="benefits1" class="coll mt-2">
+              <div class="coll-fade">
+                <ul class="text-[13px] text-dim list-disc pl-5 space-y-1.5">
+                  <li>Hands-on datasets and dashboards</li>
+                  <li>Mentor-led weekly reviews</li>
+                  <li>Job-ready portfolio tasks</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+</article>
+
+      <div class="stack-gap-2"></div>
+
+      <!-- Card 2 -->
+      <article id="card2" data-key="Claude AI Test" class="relative bg-[#FFF7EA] inner-glow grain card-radius p-4 sm:p-5 ring-soft shadow-soft text-main">
+        <div class="flex items-start gap-3">
+          <div class="selector-circle selector-checked shrink-0">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 12l4 4 8-8" stroke="#0E6156" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3">
+              <div class="pill bg-[#2b1d17] text-white ring-1 ring-white/10" style="font-size:clamp(1rem,.9rem + .6vw,1.2rem); font-weight:800; padding:.5rem .95rem; box-shadow:0 0 0 1px rgba(255,255,255,.12), 0 10px 20px -12px rgba(255,138,26,.55);">Claude AI Test</div>
+              <div class="text-right">
+                <div class="text-dim text-sm leading-tight">Job offer:</div>
+                <div class="text-[clamp(18px,3.4vw,22px)] font-extrabold text-white tight">$3.64/hr</div>
+              </div>
+            </div>
+            <div class="mt-3 text-sm text-dim">Workers needed</div>
+            <div class="mt-2">
+              <div class="progress-track relative" style="background:rgba(255,80,60,.08); border-color:rgba(255,255,255,.06);">
+                <div class="progress-bar" style="width:6%; background:linear-gradient(90deg,#6e0d0d,var(--accent-red)); opacity:.35;"></div>
+              </div>
+            </div>
+            <div class="job-actions">
+              <button class="job-apply-btn">Apply Now</button>
+              <button class="job-see-btn see-btn" data-target="#benefits2">
+                <span>See details</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#5E8076" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div id="benefits2" class="coll mt-2">
+              <div class="coll-fade">
+                <ul class="text-[13px] text-dim list-disc pl-5 space-y-1.5">
+                  <li>Full certification path</li>
+                  <li>Peer group & resale rights</li>
+                  <li>Priority tutor support</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="stack-gap-2"></div>
+
+      <div class="stack-gap-2"></div>
+
+      <!-- Card 3 -->
+      <article id="card3" data-key="ENG-TRANS-204" class="relative bg-[#FFFFFF] grain card-radius p-4 sm:p-5 ring-soft shadow-soft text-main">
+        <div class="flex justify-end mb-3">
+          <div class="premium-badge" data-intro-badge="premium">
+            <span class="premium-badge-icon">★</span>
+            PREMIUM*
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="selector-circle shrink-0"></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3">
+              <div class="pill bg-[#ff8a1a1a] text-[#0E6156] ring-1 ring-white/15 orangrad-hr" style="font-size:clamp(1rem,.9rem + .6vw,1.2rem); font-weight:800; padding:.5rem .95rem; box-shadow:0 0 0 1px rgba(255,255,255,.12), 0 10px 20px -12px rgba(255,138,26,.9);">English Translation</div>
+              <div class="text-right">
+                <div class="text-dim text-sm leading-tight">Job offer:</div>
+                <div class="text-[clamp(18px,3.4vw,22px)] font-extrabold text-white tight">$18.46/hr</div>
+              </div>
+            </div>
+            <div class="mt-3 text-sm text-dim">Workers needed</div>
+            <div class="mt-2">
+              <div class="progress-track relative">
+                <div id="jobProgress3" class="progress-bar" style="width:23%; background:linear-gradient(90deg,var(--accent-green),var(--accent-green-d)); box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);"></div>
+                <span id="jobCount3" data-current="23" data-max="100" class="absolute -top-3 left-[20%] translate-x-0 chip text-[10.5px]" style="background:linear-gradient(90deg,var(--accent-green),var(--accent-green-d)); color:#0b2213; border:1px solid rgba(0,0,0,.15);">23/100</span>
+              </div>
+            </div>
+            <div class="job-actions">
+              <button class="job-apply-btn">Apply Now</button>
+              <button class="job-see-btn see-btn" data-target="#benefits3">
+                <span>See details</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#5E8076" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div id="benefits3" class="coll mt-2">
+              <div class="coll-fade">
+                <ul class="text-[13px] text-dim list-disc pl-5 space-y-1.5">
+                  <li>Verified task track with guided reviews</li>
+                  <li>Flexible translation jobs and bonus access</li>
+                  <li>Fast approval workflow for active learners</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      </div>
+
+      <!-- Selected + Actions -->
+      <div class="divider" style="height:1px;background:linear-gradient(90deg,transparent,rgba(200,200,204,.25),transparent);"></div>
+      <div class="flex items-center justify-between pt-3">
+        <div>
+          <div class="text-dim text-[14px]">Jobs Selected</div>
+          <div id="selectedValue" class="text-[clamp(18px,3.2vw,20px)] font-extrabold" style="color:var(--accent-orange1);">Claude AI Test</div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button class="btn btn-orange">Earn</button>
+          <button class="btn btn-ghost text-main">Withdraw</button>
+        </div>
+      </div>
+
+      <div class="mt-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="hired-counter-text"><span id="hiredCounter">10</span> hired this month</div>
+          <div class="hidden">
+            <button id="dec" class="w-9 h-9 rounded-full bg-white/10 grid place-items-center">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 12h12" stroke="#5E8076" stroke-width="2.2" stroke-linecap="round"/></svg>
+            </button>
+            <div id="qty" class="w-10 h-10 rounded-full bg-white/10 grid place-items-center text-main font-semibold select-none">1</div>
+            <button id="inc" class="w-9 h-9 rounded-full bg-white/10 grid place-items-center">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 6v12M6 12h12" stroke="#5E8076" stroke-width="2.2" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button class="w-9 h-9 rounded-full bg-white/10 grid place-items-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2" fill="#5E8076"/><circle cx="5" cy="12" r="2" fill="#5E8076"/><circle cx="19" cy="12" r="2" fill="#5E8076"/></svg>
+          </button>
+          <button class="w-9 h-9 rounded-full bg-white/10 grid place-items-center">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+              <path d="M7 7h10l-1 13H8L7 7Z" stroke="#5E8076" stroke-width="1.7"/>
+              <path d="M5 7h14" stroke="#5E8076" stroke-width="1.7" stroke-linecap="round"/>
+              <path d="M9 7V5h6v2" stroke="#5E8076" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="stack-gap-3"></div>
+
+      <!-- Bottom Nav -->
+      <nav class="orangrad nav-pill shadow-soft px-6 py-4 text-[#0E6156] grid grid-cols-4 gap-2">
+        <button class="grid place-items-center w-full h-10 rounded-full bg-white/10">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 10.5 12 4l8 6.5V20a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 20v-9.5Z" stroke="#0E6156" stroke-width="1.8"/><path d="M9 21v-6h6v6" stroke="#0E6156" stroke-width="1.8"/></svg>
+        </button>
+        <button class="grid place-items-center w-full h-10 rounded-full bg-white/10">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6" stroke="#0E6156" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="#0E6156" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <button class="grid place-items-center w-full h-10 rounded-full bg-white/10">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5h2l2.5 11H18l2-8H7" stroke="#0E6156" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.4" fill="#0E6156"/><circle cx="17" cy="20" r="1.4" fill="#0E6156"/></svg>
+        </button>
+        <button class="grid place-items-center w-full h-10 rounded-full bg-white/10">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="#0E6156" stroke-width="1.8"/><path d="M4.8 20c1.6-3.6 12.8-3.6 14.4 0" stroke="#0E6156" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </nav>
+
+      <div class="mt-3 w-full flex justify-center">
+        <div class="ios-homebar"></div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // selection + qty logic (unchanged)
+    const card1 = document.getElementById('card1');
+    const card2 = document.getElementById('card2');
+    const card3 = document.getElementById('card3');
+    const selectedValue = document.getElementById('selectedValue');
+    const selectCard = (card) => {
+      [card1, card2, card3].forEach(c => {
+        const sc = c.querySelector('.selector-circle');
+        if (c === card) {
+          sc.classList.add('selector-checked');
+          sc.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 12l4 4 8-8" stroke="#0E6156" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          if (c === card2) c.classList.add('inner-glow'); else c.classList.remove('inner-glow');
+        } else {
+          sc.classList.remove('selector-checked'); sc.innerHTML=''; c.classList.remove('inner-glow');
+        }
+      });
+      if (card.dataset.key === 'DATA') {
+        selectedValue.textContent = 'Health Survey';
+      } else if (card.dataset.key === 'ENG-TRANS-204') {
+        selectedValue.textContent = 'ENG-TRANS-204';
+      } else {
+        selectedValue.textContent = 'Claude AI Test';
+      }
+    };
+    selectCard(card2);
+    card1.addEventListener('click', () => selectCard(card1));
+    card2.addEventListener('click', () => selectCard(card2));
+    card3.addEventListener('click', () => selectCard(card3));
+    document.querySelectorAll('.see-btn').forEach(btn => {
+      const t = document.querySelector(btn.dataset.target);
+      btn.addEventListener('click', e => { e.stopPropagation(); t.classList.toggle('open'); });
+    });
+    let qty=1; const qtyEl=document.getElementById('qty');
+    const render=()=>qtyEl.textContent=qty;
+    document.getElementById('inc').onclick=e=>{e.stopPropagation(); qty++; render();};
+    document.getElementById('dec').onclick=e=>{e.stopPropagation(); qty=Math.max(1,qty-1); render();};
+
+    // --- Perfect-fit width & height (subpixel-proof, desktop & mobile) ---
+    function fitToViewport(){
+      const frame = document.getElementById('frame');
+      const container = document.querySelector('.container');
+      const dpr = window.devicePixelRatio || 1;
+
+      // Reset scale & width to measure natural size
+      frame.style.transform = 'scale(1)';
+      frame.style.maxWidth = 'none';
+      frame.style.width = '100vw';
+
+      // Visual viewport is best on mobile; fallback to inner* on desktop
+      const availW = (window.visualViewport ? window.visualViewport.width  : window.innerWidth);
+      const availH = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+
+      // Snap available sizes to device pixels to avoid right/bottom 1px gaps
+      const availWSnapped = Math.floor(availW * dpr) / dpr;
+      const availHSnapped = Math.floor(availH * dpr) / dpr;
+
+      // Measure needed size at scale(1)
+      const rect = frame.getBoundingClientRect();
+      const neededW = rect.width;
+      const neededH = rect.height;
+
+      // Compute scales for each axis
+      const scaleW = availWSnapped / neededW;
+      const scaleH = (availHSnapped - 1 / dpr) / neededH; // nudge to prevent vertical overflow
+
+      // Use the limiting scale (never upscale beyond 1)
+      const scale = Math.min(1, scaleW, scaleH);
+
+      // Choose a pre-scale width so that after scaling, the visual width = availWSnapped exactly (or 0.5px larger, then clipped)
+      const preWidth = Math.ceil((availWSnapped / scale) * dpr) / dpr;
+      frame.style.width = preWidth + 'px';
+      frame.style.transform = `scale(${scale})`;
+
+      // Lock container height to viewport & hide any fractional overflow
+      container.style.height = availHSnapped + 'px';
+    }
+
+    window.addEventListener('load', fitToViewport);
+    window.addEventListener('resize', fitToViewport);
+    if (window.visualViewport) visualViewport.addEventListener('resize', fitToViewport);
+    window.addEventListener('orientationchange', () => setTimeout(fitToViewport, 200));
+  </script>
+
+  <!-- Apply Now Overlay (non-destructive; sits on top and can be removed) -->
+  <div id="applyOverlay" class="fixed inset-0 z-[9999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <form id="applyForm" class="w-full max-w-md bg-[#FFFDF7] text-white rounded-2xl shadow-2xl ring-1 ring-white/10 p-6 space-y-4">
+      <div class="text-center">
+        <h1 class="text-2xl font-extrabold">Apply Now</h1>
+        <p class="text-sm text-[#5E8076] mt-1">Fill in your details to open your dashboard.</p>
+      </div>
+      <div class="space-y-1">
+        <label for="fullName" class="text-sm font-semibold">Full name</label>
+        <input id="fullName" name="fullName" type="text" required
+               class="w-full rounded-xl bg-white/10 ring-1 ring-white/10 focus:ring-2 focus:ring-[#F2C21A] outline-none px-3 py-3 placeholder-white/50"
+               placeholder="e.g. Janet Okafor" />
+      </div>
+      <div class="space-y-1">
+        <label for="phone" class="text-sm font-semibold">Phone number</label>
+        <input id="phone" name="phone" type="tel" required
+               class="w-full rounded-xl bg-white/10 ring-1 ring-white/10 focus:ring-2 focus:ring-[#F2C21A] outline-none px-3 py-3 placeholder-white/50"
+               placeholder="e.g. 0803 123 4567" />
+      </div>
+      <div class="space-y-1">
+        <label for="email" class="text-sm font-semibold">Email</label>
+        <input id="email" name="email" type="email" required
+               class="w-full rounded-xl bg-white/10 ring-1 ring-white/10 focus:ring-2 focus:ring-[#F2C21A] outline-none px-3 py-3 placeholder-white/50"
+               placeholder="e.g. janet@example.com" />
+      </div>
+      <button type="submit"
+              class="w-full orangrad text-[#0E6156] font-extrabold rounded-2xl px-4 py-3 shadow-soft">Apply Now</button>
+      <p class="text-[11px] text-center text-[#5E8076]">Your details are used to personalize your dashboard.</p>
+    </form>
+  </div>
+
+  <script>
+    // Handle form submit, personalize welcome, and reveal the dashboard by removing overlay.
+    (function() {
+      const form = document.getElementById('applyForm');
+      const overlay = document.getElementById('applyOverlay');
+
+      function setWelcomeName(name) {
+        // Look inside the topbar for an element that starts with "Hi,"
+        const topbar = document.querySelector('.topbar');
+        if (!topbar) return;
+
+        // Prefer a tight/truncate heading inside topbar
+        let welcomeEl = null;
+        const candidates = topbar.querySelectorAll('.tight, .truncate, .font-extrabold, .text-white');
+        candidates.forEach(el => {
+          const t = (el.textContent || '').trim();
+          if (!welcomeEl && /^Hi,\s*/i.test(t)) {
+            welcomeEl = el;
+          }
+        });
+
+        // Fallback: any strong heading inside the left block of topbar
+        if (!welcomeEl) {
+          const fallback = topbar.querySelector('div div');
+          if (fallback) welcomeEl = fallback;
+        }
+
+        if (welcomeEl) {
+          welcomeEl.textContent = 'Hi, ' + name + '!';
+        }
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const fullName = document.getElementById('fullName').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        if (!fullName || !phone || !email) {
+          // HTML5 "required" should handle this, but keep a guard.
+          return;
+        }
+
+        // Personalize the existing dashboard welcome without changing its structure
+        setWelcomeName(fullName);
+
+        // Optionally persist so reload keeps name (does not alter dashboard code)
+        try {
+          localStorage.setItem('nhire_apply_fullname', fullName);
+          localStorage.setItem('nhire_apply_phone', phone);
+          localStorage.setItem('nhire_apply_email', email);
+        } catch (_) {}
+
+        // Reveal dashboard: remove overlay
+        overlay.parentNode.removeChild(overlay);
+      });
+
+      // If user has already filled before, prefill form
+      try {
+        const savedName = localStorage.getItem('nhire_apply_fullname');
+        const savedPhone = localStorage.getItem('nhire_apply_phone');
+        const savedEmail = localStorage.getItem('nhire_apply_email');
+        if (savedName) document.getElementById('fullName').value = savedName;
+        if (savedPhone) document.getElementById('phone').value = savedPhone;
+        if (savedEmail) document.getElementById('email').value = savedEmail;
+      } catch (_) {}
+    })();
+  </script>
+
+
+  <!-- Nhire Entry Plans Modal (non-destructive overlay) -->
+  <div id="nhirePlansModal" class="fixed inset-0 z-[9998] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+    <div id="plansModalCard" class="w-full max-w-3xl bg-[#FFFDF7] text-white rounded-2xl shadow-2xl ring-1 ring-white/10 overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <h2 class="text-xl font-extrabold">Choose your Access plans</h2>
+        <button id="closePlansModal" class="px-3 py-1 text-sm rounded-lg bg-white/10 hover:bg-white/15">Close</button>
+      </div>
+      <div id="plansContent" class="p-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- Plan Card: Pro -->
+          <button data-plan="Basic" class="group bg-white/5 hover:bg-white/10 rounded-2xl p-4 text-left ring-1 ring-white/10 hover:ring-white/20 transition shadow-soft relative">
+            <div class="text-sm uppercase tracking-wide text-white/70">Nhire</div>
+            <div class="mt-1 text-2xl font-extrabold">Starter - Basic Access</div>
+            
+            <div class="mt-4 text-lg font-bold"><span style="text-decoration:line-through;opacity:.6;">$22</span> $5.99<br><span id="plusNairaValue" style="font-size:12px;opacity:.7;">Naira Value</span></div>
+            <div class="mt-3 text-xs text-white/60">Tap to select</div>
+            <div class="mt-3">
+              <a href="#" class="see-benefits text-xs underline text-white/80">See details</a>
+              <div class="mt-2 hidden text-xs leading-relaxed text-white/80" data-benefit-panel="Basic">
+  <div class="space-y-2">
+    <p class="text-white/90"><span class="font-bold">Nhire
+Basic Plan - Starter Access</span> is designed to help you scale faster with better returns and training.</p>
+    <ul class="list-disc list-inside space-y-1">
+      <li>Everything in Lite, plus higher commission rates.</li>
+      <li>Priority updates, mentorship sessions and pro tutorials.</li>
+      <li>Better daily limits and improved earning multipliers.</li>
+      <li>Faster support response for quicker issue resolution.</li>
+    </ul>
+    <p class="mt-2 text-white/80 text-[11px]"><em>Estimated earnings:</em> unchanged — the same figures you already use for Basic.</p>
+  </div>
+</div>
+            </div>
+          
+            <div class="mt-4">
+              <a href="#" class="select-plan orangrad text-[#0E6156] font-extrabold rounded-2xl px-4 py-2 shadow-soft text-sm">Select Basic</a>
+            </div>
+          </button>
+          <!-- Plan Card: Premium Plan - Pro Access -->
+          <button data-plan="Pro" class="group bg-white/5 hover:bg-white/10 rounded-2xl p-4 text-left ring-1 ring-white/10 hover:ring-white/20 transition shadow-soft relative">
+            <div class="text-sm uppercase tracking-wide text-white/70">Nhire</div>
+            <div class="mt-1 text-2xl font-extrabold">Pro - Premium Access</div>
+            <div class="mt-2">
+              <span class="chip most-popular-tag" data-intro-badge="popular" style="background:linear-gradient(135deg,#FFE45C,#FFB44C,#F2C21A); color:#3a2500; box-shadow:0 10px 22px -12px rgba(255,138,26,.9); font-size:.82rem; padding:.42rem .92rem; letter-spacing:.3px;">MOST POPULAR</span>
+            </div>
+            <div class="mt-4 text-lg font-bold"><span style="text-decoration:line-through;opacity:.6;">$57</span> $9.99<br><span id="premiumNairaValue" style="font-size:12px;opacity:.7;">Naira Value</span></div>
+            <div class="mt-3 text-xs text-white/60">Tap to select</div>
+            <div class="mt-3">
+              <a href="#" class="see-benefits text-xs underline text-white/80">See details</a>
+              <div class="mt-2 hidden text-xs leading-relaxed text-white/80" data-benefit-panel="Pro">
+  <div class="space-y-2">
+    <p class="text-white/90"><span class="font-bold">Nhire Pro</span> gives you the highest leverage for team or sales‑driven growth.</p>
+    <ul class="list-disc list-inside space-y-1">
+      <li>Everything in Pro, plus advanced team & reseller tools.</li>
+      <li>Top‑tier commissions and layered bonus opportunities.</li>
+      <li>Priority queue for verifications and escalations.</li>
+      <li>Early access to new features and promotional campaigns.</li>
+    </ul>
+    <p class="mt-2 text-white/80 text-[11px]"><em>Estimated earnings:</em> unchanged — the same figures you already use for Pro.</p>
+  </div>
+</div>
+            </div>
+          
+            <div class="mt-4">
+              <a href="#" class="select-plan orangrad text-[#0E6156] font-extrabold rounded-2xl px-4 py-2 shadow-soft text-sm">Select Premium</a>
+            </div>
+          </button>
+</div>
+      </div>
+      <div class="px-6 pb-6">
+        <p class="text-xs text-white/60">You can change your plan later.</p>
+      </div>
+    </div>
+  </div>
+
+  
+  <script>
+    (function(){
+      const modal = document.getElementById('nhirePlansModal');
+      const closeBtn = document.getElementById('closePlansModal');
+      const plansContent = document.getElementById('plansContent');
+      const plansModalCard = document.getElementById('plansModalCard');
+      let shown = false; // prevent repeat while on page
+      let triggersInitialized = false;
+      const DASHBOARD_UNLOCKED_KEY = 'nhire_dashboard_unlocked_v1';
+    const JOB_SUBMISSION_DONE_KEY = 'nhire_job_submission_done_v1';
+      const VERIFICATION_KEY = 'nhire_payment_verification_record_v1';
+
+      function isDashboardUnlocked() {
+        try {
+          return localStorage.getItem(DASHBOARD_UNLOCKED_KEY) === 'true';
+        } catch (_) {
+          return false;
+        }
+      }
+
+      function hasVerifiedAccess() {
+        try {
+          if (localStorage.getItem(DASHBOARD_UNLOCKED_KEY) === 'true') return true;
+          const raw = localStorage.getItem(VERIFICATION_KEY);
+          if (!raw) return false;
+          const record = JSON.parse(raw);
+          return !!record && String(record.status || '').toLowerCase() === 'verified';
+        } catch (_) {
+          return false;
+        }
+      }
+
+      function hidePlansModalCompletely() {
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+
+      function openPlansModalOnce() {
+        if (shown || isDashboardUnlocked() || hasVerifiedAccess()) {
+          hidePlansModalCompletely();
+          return;
+        }
+        shown = true;
+        if (modal) {
+          modal.removeAttribute('aria-hidden');
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        }
+      }
+
+      function initPlanTriggers() {
+        if (triggersInitialized || isDashboardUnlocked() || hasVerifiedAccess()) {
+          hidePlansModalCompletely();
+          return;
+        }
+        triggersInitialized = true;
+        // Show after 5 seconds of *viewing the dashboard*
+        setTimeout(function(){
+          if (!isDashboardUnlocked() && !hasVerifiedAccess()) openPlansModalOnce();
+        }, 5000);
+        // Or on first interaction anywhere in the dashboard
+        document.addEventListener('click', function() {
+          if (!isDashboardUnlocked() && !hasVerifiedAccess()) openPlansModalOnce();
+        }, { once: true });
+      }
+
+      // Defer trigger setup until Apply overlay is gone (dashboard visible)
+      const overlay = document.getElementById('applyOverlay');
+      if (!overlay) {
+        // No overlay present -> initialize now
+        if (hasVerifiedAccess()) {
+          hidePlansModalCompletely();
+        }
+        initPlanTriggers();
+      } else {
+        // Observe DOM to detect when overlay is removed
+        const mo = new MutationObserver(function(){
+          if (!document.getElementById('applyOverlay')) {
+            initPlanTriggers();
+            mo.disconnect();
+          }
+        });
+        mo.observe(document.body, { childList: true, subtree: true });
+      }
+
+      // Close button
+      closeBtn && closeBtn.addEventListener('click', function(){
+        hidePlansModalCompletely();
+      });
+
+      // Handle plan select -> show PayFac notice + button (leave as-is)
+      const originalPlansMarkup = plansContent ? plansContent.innerHTML : '';
+      plansContent && plansContent.addEventListener('click', function(e){
+        const backBtn = e.target.closest('#backToEntryPlans');
+        if (backBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (originalPlansMarkup) plansContent.innerHTML = originalPlansMarkup;
+          if (plansModalCard) {
+            plansModalCard.classList.remove('max-w-sm');
+            plansModalCard.classList.add('max-w-3xl');
+          }
+          return;
+        }
+
+        const card = e.target.closest('button[data-plan]');
+        if (!card) return;
+        const plan = card.getAttribute('data-plan') || '';
+        if (plansModalCard) {
+          plansModalCard.classList.remove('max-w-3xl');
+          plansModalCard.classList.add('max-w-sm');
+        }
+        plansContent.innerHTML = plan === 'Pro' ? `
+          <div class="space-y-4">
+            <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-5">
+              <div class="flex justify-center mb-3"><span class="chip most-popular-tag" data-intro-badge="popular" style="background:linear-gradient(135deg,#FFB44C,#F2C21A); color:#3a2500; box-shadow:0 6px 14px -8px rgba(0,0,0,.45); font-size:1.14rem; padding:.375rem .9rem;">MOST POPULAR</span></div>
+              <h3 class="text-2xl font-extrabold text-center">NHIRE Pro Access<br>$9.99 (<span style="text-decoration:line-through;opacity:.7;">$57</span>)</h3>
+              <ul class="mt-4 space-y-2 text-sm text-white/90 leading-relaxed">
+                <li>Unlimited daily work access</li>
+                <li>Priority access to high-paying jobs</li>
+                <li>Personalized job recommendations</li>
+                <li>Full access to all AI courses</li>
+                <li>Advanced CV optimization + templates</li>
+                <li>Private premium community access</li>
+                <li>Explore 45+ remote job categories</li>
+                <li>Proven earning growth system</li>
+                <li>Productivity & automation tools</li>
+                <li>Early access to new opportunities</li>
+              </ul>
+              <div class="mt-4 rounded-2xl bg-gradient-to-r from-[#F2C21A] to-[#F4A61C] text-[#0E6156] font-extrabold p-4 text-sm text-center shadow-soft">
+                ⚡ Activate your NHIRE Pro plan now to unlock better jobs, faster access, and a stronger earning path. Tap the button below and secure your spot now.
+              </div>
+            </div>
+            <div class="flex items-center justify-center">
+              <a id="buyPayfacBtn"
+                 class="orangrad text-[#0E6156] font-extrabold rounded-2xl px-6 py-3 shadow-soft cursor-pointer">
+                 Get Verified Now
+              </a>
+            </div>
+          </div>
+        ` : `
+          <div class="space-y-4">
+            <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-5">
+              <h3 class="text-2xl font-extrabold text-center leading-tight"><span class="block">NHIRE Starters</span><span class="block mt-1">$5.99 (<span style="text-decoration:line-through;opacity:.7;">$22</span>)</span></h3>
+              <ul class="mt-4 space-y-2 text-sm text-white/90 leading-relaxed">
+                <li>3 hours daily work access</li>
+                <li>Explore 18 remote job categories</li>
+                <li>Access global &amp; local job opportunities</li>
+                <li>Professional CV review</li>
+                <li>1 AI skill course included</li>
+                <li>Subscription is valid for 3 months</li>
+              </ul>
+              <div class="mt-4 rounded-2xl bg-gradient-to-r from-[#F2C21A] to-[#F4A61C] text-[#0E6156] font-extrabold p-4 text-sm text-center shadow-soft leading-relaxed">
+                Your selected plan needs to be verified. Complete your payment to activate your NHIRE access and start earning in USD.
+              </div>
+            </div>
+            <div class="flex items-center justify-center">
+              <a id="buyPayfacBtn"
+                 class="orangrad text-[#0E6156] font-extrabold rounded-2xl px-6 py-3 shadow-soft cursor-pointer text-center w-full sm:w-auto">
+                 Get verified now
+              </a>
+            </div>
+          </div>
+        `;
+        try {
+          const ev = new CustomEvent('nhire:plan:selected', { detail: { plan } });
+          window.dispatchEvent(ev);
+        } catch(_) {}
+      });
+    })();
+  
+      // Toggle "See details" dropdowns (don't select the plan on this click)
+      plansContent && plansContent.addEventListener('click', function(e){
+        const toggle = e.target.closest('.see-benefits');
+        if (!toggle) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const card = toggle.closest('button[data-plan]');
+        if (!card) return;
+        const plan = card.getAttribute('data-plan');
+        const panel = card.querySelector(`[data-benefit-panel="${plan}"]`);
+        if (!panel) return;
+        const isHidden = panel.classList.contains('hidden');
+        // Optionally close others within the grid
+        plansContent.querySelectorAll('[data-benefit-panel]').forEach(p => {
+          if (p !== panel) p.classList.add('hidden');
+        });
+        panel.classList.toggle('hidden', !isHidden && false)
+        if (isHidden) { panel.classList.remove('hidden'); } else { panel.classList.add('hidden'); }
+      });
+</script>
+
+
+
+  
+
+  <!-- Payment Method Selection Modal -->
+  <div id="paymentMethodModal" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+    <div class="w-full max-w-sm bg-[#FFFDF7] text-white rounded-2xl shadow-2xl ring-1 ring-white/10 overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <h3 class="text-lg font-extrabold">Choose Payment Method</h3>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <p class="text-sm text-white/70">Select how you want to pay for your Nhire entry plan.</p>
+        <div class="space-y-3">
+          <!-- Bank Transfer -->
+          <button type="button" data-pay-method="bank" class="w-full flex items-center justify-between rounded-xl bg-white/5 hover:bg-white/10 px-4 py-3">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-full bg-white/90 grid place-items-center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="7" width="18" height="11" rx="2" stroke="#0E6156" stroke-width="1.4"/>
+                  <path d="M3 11h18" stroke="#0E6156" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M9 5h6" stroke="#0E6156" stroke-width="1.4" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <div class="text-left">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <div class="font-semibold text-sm">Bank Transfer</div>
+                  <span class="popular-intro-shake inline-flex items-center rounded-full bg-[#F2C21A] px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-[#0E6156]">Most Popular</span>
+                </div>
+                <div class="text-xs text-white/70">Normal bank transfer</div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-white/80">Use</span>
+          </button>
+
+          <!-- USDT / Crypto -->
+          <button type="button" data-pay-method="usdt" class="w-full flex items-center justify-between rounded-xl bg-[#22d3ee1a] hover:bg-[#22d3ee33] px-4 py-3">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-full bg-[#22D3EE] grid place-items-center font-bold text-[#0E6156] text-xs">₿</span>
+              <div class="text-left">
+                <div class="font-semibold text-sm">USDT (Crypto)</div>
+                <div class="text-xs text-white/70">Pay using USDT on your wallet</div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-white/80">Use</span>
+          </button>
+
+          <!-- PayPal -->
+          <button type="button" data-pay-method="paypal" class="w-full flex items-center justify-between rounded-xl bg-[#22c55e1a] hover:bg-[#22c55e33] px-4 py-3">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-full bg-[#22C55E] grid place-items-center font-bold text-[#0E6156] text-xs">OP</span>
+              <div class="text-left">
+                <div class="font-semibold text-sm">PayPal</div>
+                <div class="text-xs text-white/70">For PayPal Users Only</div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-white/80">Use</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Card Modal (non-destructive overlay) -->
+  <div id="payfacPaymentModal" class="fixed inset-0 z-[10000] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+    <div class="w-full max-w-md bg-[#FFFDF7] text-white rounded-2xl shadow-2xl ring-1 ring-white/10 overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <h3 class="text-lg font-extrabold">Complete Your Setup</h3>
+        <button id="closePaymentModal" class="px-3 py-1 text-sm rounded-lg bg-white/10 hover:bg-white/15">Close</button>
+      </div>
+      <div class="px-6 py-5 space-y-3" id="paymentCardBody">
+        <p class="text-sm">Hi <span id="pfUserName" class="font-bold">there</span>, pay to this account to get started.</p>
+        <div class="grid grid-cols-1 gap-2 text-sm">
+          <div class="flex items-start justify-between bg-white/5 rounded-xl p-3 ring-1 ring-white/10">
+            <div class="min-w-0 flex-1 pr-3">
+              <div class="text-white/70" id="pfAcctNoLabel">Account number</div>
+              <div class="font-bold break-all leading-relaxed text-[13px] sm:text-sm" id="pfAcctNo">9655989609</div>
+            </div>
+            <button class="ml-3 shrink-0 text-xs bg-white/10 hover:bg-white/15 rounded-lg px-3 py-2" data-copy-target="#pfAcctNo">Copy</button>
+          </div>
+          <div class="flex items-center justify-between bg-white/5 rounded-xl p-3 ring-1 ring-white/10">
+            <div>
+              <div class="text-white/70" id="pfAcctNameLabel">Account Name</div>
+              <div class="font-bold" id="pfAcctName">8qube-tech Nhire Ai</div>
+            </div>
+            <button class="ml-3 text-xs bg-white/10 hover:bg-white/15 rounded-lg px-3 py-2" data-copy-target="#pfAcctName">Copy</button>
+          </div>
+          <div class="flex items-center justify-between bg-white/5 rounded-xl p-3 ring-1 ring-white/10">
+            <div>
+              <div class="text-white/70" id="pfBankLabel">Bank</div>
+              <div class="font-bold" id="pfBank">Providus</div>
+            </div>
+            <button class="ml-3 text-xs bg-white/10 hover:bg-white/15 rounded-lg px-3 py-2" data-copy-target="#pfBank">Copy</button>
+          </div>
+          <div class="flex items-center justify-between bg-white/5 rounded-xl p-3 ring-1 ring-white/10">
+            <div>
+              <div class="text-white/70">Amount to pay</div>
+              <div class="font-extrabold" id="pfAmount">$0</div><div class="text-xs text-[#F2C21A] mt-1 hidden" id="pfAmountLive"></div>
+            </div>
+            <button class="ml-3 text-xs bg-white/10 hover:bg-white/15 rounded-lg px-3 py-2" data-copy-target="#pfAmount">Copy</button>
+          </div>
+          <div class="flex items-center justify-between bg-white/5 rounded-xl p-3 ring-1 ring-white/10"><div><div class="text-white/70">Payment Note</div><div class="font-semibold" id="pfDuration">Submit payment proof immediately payment is done</div><div class="text-xs text-[#F2C21A] mt-1" id="countdownTimer">01:00:00</div></div></div>
+        </div>
+        <div class="pt-3 text-center">
+          <button id="submitPaymentProof" class="orangrad text-[#0E6156] font-extrabold rounded-2xl px-5 py-3 shadow-soft">
+            Submit Payment Proof
+          </button>
+        </div>
+      </div>
+    
+  <!-- Submit Proof Options Modal -->
+  <div id="submitOptionsModal" class="fixed inset-0 z-[10001] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+    <div class="w-full max-w-sm bg-[#FFFDF7] text-white rounded-2xl shadow-2xl ring-1 ring-white/10 overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <h3 class="text-lg font-extrabold">Choose how to submit</h3>
+        <button type="button" id="closeSubmitOptions" class="px-3 py-1 text-sm rounded-lg bg-white/10 hover:bg-white/15">Close</button>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <p class="text-sm text-white/70">Select Telegram for fast response and verification. Your details will be filled in automatically.</p>
+        <div class="space-y-3">
+          <!--
+          <button type="button" data-submit-channel="whatsapp" class="w-full flex items-center justify-between rounded-xl bg-[#25d3661a] hover:bg-[#25d36633] px-4 py-3">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-full bg-[#25D366] grid place-items-center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3a9 9 0 0 0-9 9c0 1.6.4 3.1 1.2 4.4L3 21l4.8-1.2A9 9 0 1 0 12 3Z" stroke="#0E6156" stroke-width="1.4"/>
+                  <path d="M9.5 9.2c-.2-.6-.5-.6-.8-.6h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1-1.1 2.5 0 1.5 1.1 3 1.3 3.2.2.2 2.1 3.2 5.1 4.3 2.5 1 3 1 3.5.9.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.1-1.4-.1-.1-.2-.1-.5-.2s-1.7-.8-1.9-.9c-.2-.1-.4-.1-.6.1-.2.2-.7.9-.9 1-.2.1-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.3Z" fill="#0E6156"/>
+                </svg>
+              </span>
+              <div class="text-left">
+                <div class="font-semibold text-sm">WhatsApp</div>
+                <div class="text-xs text-white/70">Chat a Verified PayFac on WhatsApp</div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-white/80">Use</span>
+          </button>
+          -->
+
+          <button type="button" data-submit-channel="telegram" class="w-full flex items-center justify-between rounded-xl bg-[#229ED91a] hover:bg-[#229ED933] px-4 py-3">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-full bg-[#229ED9] grid place-items-center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M20.5 4.5 3.8 11.2c-.7.3-.7 1.1-.1 1.4L8 14.8l1.8 4c.3.7 1.2.7 1.5 0l1.7-3.4 4.3 2.9c.6.4 1.4.1 1.6-.6l2.1-12.1c.1-.7-.5-1.2-1.3-.9Z" stroke="#0E6156" stroke-width="1.3" stroke-linejoin="round"/>
+                  <path d="m9 15 7-7-8.5 5" stroke="#0E6156" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div class="text-left">
+                <div class="font-semibold text-sm">Telegram</div>
+                <div class="text-xs text-white/70">Send via Telegram chat</div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-white/80">Use</span>
+          </button>
+
+          <button type="button" data-submit-channel="email" class="w-full flex items-center justify-between rounded-xl bg-white/5 hover:bg-white/10 px-4 py-3">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-full bg-white/90 grid place-items-center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="#0E6156" stroke-width="1.4"/>
+                  <path d="M5 7.5 12 12l7-4.5" stroke="#0E6156" stroke-width="1.4" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <div class="text-left">
+                <div class="font-semibold text-sm">Email</div>
+                <div class="text-xs text-white/70">Send as a detailed email</div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-white/80">Use</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+  </div>
+
+  <script>
+    (function(){
+      const payModal = document.getElementById('payfacPaymentModal');
+      const closePay = document.getElementById('closePaymentModal');
+      const nameEl = document.getElementById('pfUserName');
+      const amtEl = document.getElementById('pfAmount');
+      const submitBtn = document.getElementById('submitPaymentProof');
+
+      // Track plan and amount selected using the event dispatched earlier
+      const planAmountMap = {
+        'Basic': '$5.99',
+        'Pro': '$9.99'
+      };
+      const planAmountMapUsd = {
+        'Basic': 5.99,
+        'Pro': 9.99
+      };
+      let selectedPlan = null;
+      let selectedAmount = null;
+      let selectedAmountUsd = null;
+      let selectedAmountNaira = null;
+
+      window.addEventListener('nhire:plan:selected', function(e){
+        selectedPlan = (e.detail && e.detail.plan) || null;
+        selectedAmount = planAmountMap[selectedPlan] || null;
+        selectedAmountUsd = planAmountMapUsd[selectedPlan] || null;
+        window.__nhireSelectedPlan = selectedPlan;
+        window.__nhireSelectedAmount = selectedAmount;
+        window.__nhireSelectedAmountUsd = selectedAmountUsd;
+      });
+
+      function updateSelectedPlanAmountToNaira(){
+        const amtEl = document.getElementById('pfAmount');
+        if (!amtEl) return;
+
+        function formatNaira(value){
+          return new Intl.NumberFormat('en-NG', {
+            style: 'currency',
+            currency: 'NGN',
+            maximumFractionDigits: 0
+          }).format(value || 0);
+        }
+
+        function parseNairaText(text){
+          if (!text) return NaN;
+          const cleaned = String(text).replace(/[^0-9.]/g, '');
+          return cleaned ? Number(cleaned) : NaN;
+        }
+
+        if (!selectedPlan) {
+          amtEl.textContent = '₦0';
+          return;
+        }
+
+        let nairaText = '';
+        if (selectedPlan === 'Basic') {
+          const plusEl = document.getElementById('plusNairaValue');
+          nairaText = plusEl ? plusEl.textContent.trim() : '';
+        } else if (selectedPlan === 'Pro') {
+          const premiumEl = document.getElementById('premiumNairaValue');
+          nairaText = premiumEl ? premiumEl.textContent.trim() : '';
+        }
+
+        const parsed = parseNairaText(nairaText);
+
+        if (nairaText && /^₦/.test(nairaText) && isFinite(parsed) && parsed > 0) {
+          selectedAmountNaira = parsed;
+          window.__nhireSelectedAmountNaira = selectedAmountNaira;
+          amtEl.textContent = nairaText;
+          return;
+        }
+
+        const fallbackRate = 1600;
+        const fallbackNaira = (selectedAmountUsd || 0) * fallbackRate;
+        selectedAmountNaira = fallbackNaira;
+        window.__nhireSelectedAmountNaira = selectedAmountNaira;
+        amtEl.textContent = formatNaira(fallbackNaira);
+      }
+
+      function openPaymentCard(){
+        // Pull the name/phone/email from localStorage or fallback
+        let name = 'there', phone = '', email = '';
+        try {
+          name = localStorage.getItem('nhire_apply_fullname') || 'there';
+          phone = localStorage.getItem('nhire_apply_phone') || '';
+          email = localStorage.getItem('nhire_apply_email') || '';
+        } catch(_) {}
+
+        if (nameEl) nameEl.textContent = name;
+        updateSelectedPlanAmountToNaira();
+        const amtLiveEl = document.getElementById('pfAmountLive');
+        if (amtLiveEl) { amtLiveEl.textContent = ''; amtLiveEl.classList.add('hidden'); }
+
+        // First show payment method selector; after user chooses, show payment card
+        const methodModal = document.getElementById('paymentMethodModal');
+        if (methodModal){
+          methodModal.classList.remove('hidden');
+          methodModal.classList.add('flex');
+        } else if (payModal){
+          // Fallback: show payment card directly
+          payModal.classList.remove('hidden');
+          payModal.classList.add('flex');
+        }
+      }
+
+      function closePaymentCard(){
+        payModal.classList.add('hidden');
+        payModal.classList.remove('flex');
+      }
+
+      // Expose openPaymentCard to other scripts (if needed)
+      window.openPaymentCard = openPaymentCard;
+
+      closePay && closePay.addEventListener('click', closePaymentCard);
+
+      // Intercept Buy PayFac button (capture phase) to open this modal
+      document.addEventListener('click', function(e){
+        const btn = e.target.closest('#buyPayfacBtn');
+        if (!btn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+        openPaymentCard();
+      }, true); // capture
+
+      // Per-field copy buttons
+      document.addEventListener('click', async function(e){
+        const copyBtn = e.target.closest('button[data-copy-target]');
+        if (!copyBtn) return;
+        const sel = copyBtn.getAttribute('data-copy-target');
+        const target = document.querySelector(sel);
+        if (!target) return;
+        const text = (target.textContent || '').trim();
+
+        const showCopiedState = () => {
+          const original = copyBtn.textContent;
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => copyBtn.textContent = original, 1200);
+        };
+
+        const fallbackCopy = (value) => {
+          const ta = document.createElement('textarea');
+          ta.value = value;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          ta.style.pointerEvents = 'none';
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          ta.setSelectionRange(0, ta.value.length);
+          let copied = false;
+          try {
+            copied = document.execCommand('copy');
+          } catch (_) {}
+          document.body.removeChild(ta);
+          return copied;
+        };
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            showCopiedState();
+            return;
+          }
+          if (fallbackCopy(text)) {
+            showCopiedState();
+            return;
+          }
+          alert('Copy failed. Please tap again.');
+        } catch(_) {
+          if (fallbackCopy(text)) {
+            showCopiedState();
+            return;
+          }
+          alert('Copy failed. Please tap again.');
+        }
+      });
+
+      // Submit Payment Proof -> show options (WhatsApp, Email, Telegram) with prefilled details
+      submitBtn && submitBtn.addEventListener('click', function(){
+        // Gather details
+        let name = 'there', phone = '', email = '';
+        try {
+          name = localStorage.getItem('nhire_apply_fullname') || 'there';
+          phone = localStorage.getItem('nhire_apply_phone') || '';
+          email = localStorage.getItem('nhire_apply_email') || '';
+        } catch(_) {}
+
+        const plan = selectedPlan || 'Not selected';
+        const amount = (document.getElementById('pfAmount')?.textContent || '').trim() || '$0';
+        const amountLive = (document.getElementById('pfAmountLive')?.textContent || '').trim();
+        const amountLabel = amountLive ? `${amount} (${amountLive})` : amount;
+
+        const acctNo = (document.getElementById('pfAcctNo')?.textContent || '').trim();
+        const acctName = (document.getElementById('pfAcctName')?.textContent || '').trim();
+        const bank = (document.getElementById('pfBank')?.textContent || '').trim();
+        const duration = (document.getElementById('pfDuration')?.textContent || '').trim();
+
+        const msg = `Hello Admin, Please verify my Payment.
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+Selected Plan: ${plan}
+Amount: ${amountLabel}
+
+Payment Details I used:
+Account number: ${acctNo}
+Account Name: ${acctName}
+Bank: ${bank}
+
+Please confirm my payment. I will upload my proof of payment now (picture/screenshot/file/pdf).`;
+
+        // Store message globally so the submit options can reuse it
+        window.__nhireProofMsg = msg || '';
+
+        // Open options modal
+        const optModal = document.getElementById('submitOptionsModal');
+        if (optModal){
+          optModal.classList.remove('hidden');
+          optModal.classList.add('flex');
+        }
+      });
+
+      // Handle Submit Proof channel selection (WhatsApp, Email, Telegram)
+      document.addEventListener('click', function(e){
+        const btn = e.target.closest('[data-submit-channel]');
+        if (!btn) return;
+        const channel = btn.getAttribute('data-submit-channel');
+        const msg = window.__nhireProofMsg || '';
+        if (!msg) return;
+
+        // Close options modal if open
+        const optModal = document.getElementById('submitOptionsModal');
+        if (optModal){
+          optModal.classList.add('hidden');
+          optModal.classList.remove('flex');
+        }
+
+        if (channel === 'whatsapp'){
+          const waNumber = "2347080446735";
+          const url = "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(msg);
+          window.location.href = url;
+        } else if (channel === 'email'){
+          const emailTo = "nhirejobs.inbox@gmail.com";
+          const subject = "Nhire Payment Proof Verification";
+          const url = "mailto:" + emailTo + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(msg);
+          window.location.href = url;
+        } else if (channel === 'telegram'){
+          const tgLink = "https://t.me/nhireai";
+          const url = tgLink + "?text=" + encodeURIComponent(msg);
+          window.location.href = url;
+        }
+      });
+
+      // Close button on options modal
+      (function(){
+        const optModal = document.getElementById('submitOptionsModal');
+        const closeBtn = document.getElementById('closeSubmitOptions');
+        if (!optModal) return;
+        if (closeBtn){
+          closeBtn.addEventListener('click', function(){
+            optModal.classList.add('hidden');
+            optModal.classList.remove('flex');
+          });
+        }
+        optModal.addEventListener('click', function(e){
+          if (e.target === optModal){
+            optModal.classList.add('hidden');
+            optModal.classList.remove('flex');
+          }
+        });
+      })();
+    })();
+  </script><script>
+(function(){
+  const methodModal = document.getElementById('paymentMethodModal');
+  const payModal   = document.getElementById('payfacPaymentModal');
+  const acctNoEl   = document.getElementById('pfAcctNo');
+  const acctNameEl = document.getElementById('pfAcctName');
+  const bankEl     = document.getElementById('pfBank');
+  const acctNoLabelEl   = document.getElementById('pfAcctNoLabel');
+  const acctNameLabelEl = document.getElementById('pfAcctNameLabel');
+  const bankLabelEl     = document.getElementById('pfBankLabel');
+
+  // Configure different payment details per method
+  const paymentMethods = {
+    paypal: {
+      acctNoLabel: 'Account number',
+      acctNameLabel: 'Account Name',
+      bankLabel: 'Bank',
+      acctNo: '9030735424',
+      acctName: 'Yeneime Etim',
+      bank: 'PayPal'
+    },
+    bank: {
+      // Default bank details already shown on the card
+      acctNoLabel: 'Account number',
+      acctNameLabel: 'Account Name',
+      bankLabel: 'Bank',
+      acctNo: acctNoEl ? acctNoEl.textContent.trim() : '9655989609',
+      acctName: acctNameEl ? acctNameEl.textContent.trim() : '8qube-tech Nhire Ai',
+      bank: bankEl ? bankEl.textContent.trim() : 'Providus'
+    },
+    usdt: {
+      acctNoLabel: 'Wallet Address',
+      acctNameLabel: 'Contract',
+      bankLabel: 'Network',
+      acctNo: 'TYAtqcUzq1YZexNSu7HQNp87BSRTTk2CMG',
+      acctName: 'USDT',
+      bank: 'TRC20'
+    }
+  };
+
+  const amountEl = document.getElementById('pfAmount');
+  const amountLiveEl = document.getElementById('pfAmountLive');
+
+  function formatNaira(value){
+    return new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 }).format(value || 0);
+  }
+
+  function formatUsd(value){
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value || 0);
+  }
+
+  function getSelectedAmountText(){
+    const globalAmount = (window.__nhireSelectedAmount || '').trim();
+    if (globalAmount) return globalAmount;
+    const parsed = Number(String(amountEl && amountEl.textContent ? amountEl.textContent : '').replace(/[^0-9.]/g, ''));
+    return parsed > 0 ? formatUsd(parsed) : '$0.00';
+  }
+
+  function getSelectedAmountUsd(){
+    const globalUsd = Number(window.__nhireSelectedAmountUsd || 0);
+    if (isFinite(globalUsd) && globalUsd > 0) return globalUsd;
+    const parsed = Number(String(getSelectedAmountText()).replace(/[^0-9.]/g, ''));
+    return isFinite(parsed) ? parsed : 0;
+  }
+
+  async function setBankTransferAmountLive(){
+    if (!amountEl || !amountLiveEl) return;
+    const selectedAmount = getSelectedAmountText();
+    const selectedAmountUsd = getSelectedAmountUsd();
+    amountLiveEl.classList.remove('hidden');
+    amountEl.textContent = 'Loading...';
+    amountLiveEl.textContent = selectedAmount;
+    try {
+      const res = await fetch('https://open.er-api.com/v6/latest/USD', { cache: 'no-store' });
+      const data = await res.json();
+      const ngnRate = data && data.rates ? Number(data.rates.NGN) : NaN;
+      if (!ngnRate || !isFinite(ngnRate)) throw new Error('Invalid NGN rate');
+      const ngnValue = selectedAmountUsd * ngnRate;
+      window.__nhireSelectedAmountNaira = ngnValue;
+      amountEl.textContent = formatNaira(ngnValue);
+      amountLiveEl.textContent = selectedAmount + ' live';
+    } catch (_) {
+      amountEl.textContent = selectedAmount;
+      amountLiveEl.textContent = 'Live NGN unavailable';
+    }
+  }
+
+  function setUsdtAmount(){
+    if (!amountEl || !amountLiveEl) return;
+    const selectedAmount = getSelectedAmountText();
+    amountEl.textContent = selectedAmount;
+    const nairaEquivalent = Number(window.__nhireSelectedAmountNaira || 0);
+    amountLiveEl.classList.remove('hidden');
+    amountLiveEl.textContent = nairaEquivalent > 0 ? formatNaira(nairaEquivalent) + ' equivalent' : 'Pay the exact USDT equivalent';
+  }
+
+  function clearLiveAmount(){
+    if (amountEl) amountEl.textContent = getSelectedAmountText();
+    if (amountLiveEl) {
+      amountLiveEl.textContent = '';
+      amountLiveEl.classList.add('hidden');
+    }
+  }
+
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('[data-pay-method]');
+    if (!btn) return;
+    const methodKey = btn.getAttribute('data-pay-method');
+    const cfg = paymentMethods[methodKey];
+    if (!cfg) return;
+
+    if (methodKey === 'paypal') {
+      if (methodModal){
+        methodModal.classList.add('hidden');
+        methodModal.classList.remove('flex');
+      }
+      const paypalUnavailableModal = document.getElementById('paypalUnavailableModal');
+      if (paypalUnavailableModal){
+        paypalUnavailableModal.classList.remove('hidden');
+        paypalUnavailableModal.classList.add('flex');
+      }
+      return;
+    }
+
+    if (acctNoLabelEl)   acctNoLabelEl.textContent   = cfg.acctNoLabel || 'Account number';
+    if (acctNameLabelEl) acctNameLabelEl.textContent = cfg.acctNameLabel || 'Account Name';
+    if (bankLabelEl)     bankLabelEl.textContent     = cfg.bankLabel || 'Bank';
+    if (acctNoEl)   acctNoEl.textContent   = cfg.acctNo;
+    if (acctNameEl) acctNameEl.textContent = cfg.acctName;
+    if (bankEl)     bankEl.textContent     = cfg.bank;
+
+    if (methodKey === 'bank') {
+      setBankTransferAmountLive();
+    } else if (methodKey === 'usdt') {
+      setUsdtAmount();
+    } else {
+      clearLiveAmount();
+    }
+
+    if (methodModal){
+      methodModal.classList.add('hidden');
+      methodModal.classList.remove('flex');
+    }
+    if (payModal){
+      payModal.classList.remove('hidden');
+      payModal.classList.add('flex');
+    }
+  });
+})();
+</script>
+
+
+
+<script>
+(function(){
+  const plansContent = document.getElementById('plansContent');
+  if (!plansContent) return;
+  plansContent.addEventListener('click', function(e){
+    // Ensure "Select" buttons act like selecting the card (no preventDefault here).
+    const sel = e.target.closest('.select-plan');
+    if (sel) {
+      // Let the click bubble to the existing handler which selects the plan.
+      // Prevent anchor navigation jump
+      e.preventDefault();
+      // Manually trigger a click on the containing card to be explicit
+      const card = sel.closest('button[data-plan]');
+      if (card) card.click();
+      return;
+    }
+  });
+})();
+</script>
+
+
+<style>
+  /* Reduce Entry Plan popup card size by 30% and keep it centered */
+  #nhirePlansModal > div {
+    transform: scale(0.7);
+    transform-origin: center center;
+  }
+
+    .verification-card{background:#FFFFFF;border:1px solid rgba(14,120,106,.12);border-radius:20px;}
+    .verification-label{color:#607D74;font-size:11px;font-weight:600;line-height:1.35;}
+    .verification-value{color:#0E786A;font-weight:800;line-height:1.35;word-break:break-word;}
+    .verification-soft{color:#607D74;}
+    .verification-details-btn{color:#0D8B72;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:6px;background:none;border:none;padding:0;cursor:pointer;}
+    .verification-details-btn svg{transition:transform .22s ease;}
+    .verification-details-btn[aria-expanded="true"] svg{transform:rotate(180deg);}
+    .verification-detail-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease,opacity .28s ease;opacity:0;}
+    .verification-detail-panel.open{grid-template-rows:1fr;opacity:1;}
+    .verification-detail-panel > div{overflow:hidden;}
+    .verification-progress-track{height:8px;border-radius:9999px;background:rgba(14,120,106,.10);overflow:hidden;}
+    .verification-progress-line{height:100%;border-radius:9999px;background:linear-gradient(90deg,var(--accent-orange1),var(--accent-orange2));animation:verificationPulse 1.8s ease-in-out infinite;}
+    .verification-progress-line.is-verified{background:linear-gradient(90deg,var(--accent-green),var(--accent-green-d));animation:none;}
+    .verification-avatar{width:42px;height:42px;border-radius:9999px;display:grid;place-items:center;font-weight:800;font-size:13px;flex:none;}
+    @keyframes verificationPulse{0%{transform:translateX(-18%);}50%{transform:translateX(0);}100%{transform:translateX(-18%);}}
+
+  </style>
+
+
+<script>
+(function(){
+  const DASHBOARD_UNLOCKED_KEY = 'nhire_dashboard_unlocked_v1';
+  const VERIFICATION_KEY = 'nhire_payment_verification_record_v1';
+
+  function hasVerifiedAccess(){
+    try {
+      if (localStorage.getItem(DASHBOARD_UNLOCKED_KEY) === 'true') return true;
+      const raw = localStorage.getItem(VERIFICATION_KEY);
+      if (!raw) return false;
+      const record = JSON.parse(raw);
+      return !!record && String(record.status || '').toLowerCase() === 'verified';
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function showPlans() {
+    const modal = document.getElementById('nhirePlansModal');
+    if (!modal || hasVerifiedAccess()) return;
+    if (!modal.classList.contains('hidden')) return;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function initAlwaysClickOpen(){
+    document.addEventListener('click', function(e){
+      if (hasVerifiedAccess()) return;
+      if (
+        e.target.closest('#nhirePlansModal') ||
+        e.target.closest('#jobDispatchModal') ||
+        e.target.closest('#jobSubmissionSuccessModal') ||
+        e.target.closest('#verificationQueueModal') ||
+        e.target.closest('#verifiedSuccessModal') ||
+        e.target.closest('#paymentMethodModal') ||
+        e.target.closest('#payfacPaymentModal') ||
+        e.target.closest('#submitOptionsModal') ||
+        e.target.closest('#applyOverlay')
+      ) return;
+      showPlans();
+    });
+  }
+
+  const overlay = document.getElementById('applyOverlay');
+  if (!overlay) {
+    initAlwaysClickOpen();
+  } else {
+    const mo = new MutationObserver(function(){
+      if (!document.getElementById('applyOverlay')) {
+        initAlwaysClickOpen();
+        mo.disconnect();
+      }
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  function startCountdown(){
+    var timer = document.getElementById('countdownTimer');
+    if (!timer) return;
+    var remaining = 3600; // 1 hour in seconds
+    if (window._pfCountdown) clearInterval(window._pfCountdown);
+    function update(){
+      var h = String(Math.floor(remaining / 3600)).padStart(2,'0');
+      var m = String(Math.floor((remaining % 3600) / 60)).padStart(2,'0');
+      var s = String(remaining % 60).padStart(2,'0');
+      timer.textContent = h + ":" + m + ":" + s;
+      if (remaining <= 0){
+        clearInterval(window._pfCountdown);
+        timer.textContent = "Expired";
+        timer.classList.add("text-red-400");
+        return;
+      }
+      remaining--;
+    }
+    update();
+    window._pfCountdown = setInterval(update, 1000);
+  }
+
+  // Observe the payment modal visibility
+  var payModal = document.getElementById('payfacPaymentModal');
+  if (payModal){
+    var obs = new MutationObserver(function(){
+      if (!payModal.classList.contains('hidden')){
+        startCountdown();
+      }
+    });
+    obs.observe(payModal, { attributes: true, attributeFilter: ['class'] });
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  const plansContent = document.getElementById('plansContent');
+  const plansModal   = document.getElementById('nhirePlansModal');
+  const payModal     = document.getElementById('payfacPaymentModal');
+
+  // Cache the original grid markup so we can restore it later
+  if (plansContent && !window._nhireOriginalPlansHTML) {
+    window._nhireOriginalPlansHTML = plansContent.innerHTML;
+  }
+
+  function openPlansModal(){
+    if (!plansModal) return;
+    plansModal.classList.remove('hidden');
+    plansModal.classList.add('flex');
+  }
+  function closePayModal(){
+    if (!payModal) return;
+    payModal.classList.add('hidden');
+    payModal.classList.remove('flex');
+  }
+  function restorePlansGrid(){
+    if (!plansContent || !window._nhireOriginalPlansHTML) return;
+    plansContent.innerHTML = window._nhireOriginalPlansHTML;
+  }
+
+  // When a plan is selected, append a subtle Back button below the message
+  window.addEventListener('nhire:plan:selected', function(){
+    if (!plansContent) return;
+    if (plansContent.querySelector('#backToPlansBtn')) return;
+
+    const wrap = document.createElement('div');
+    wrap.className = "mt-4 flex items-center justify-center";
+    wrap.innerHTML = '<button id="backToPlansBtn" class="bg-white/10 hover:bg-white/15 text-white rounded-2xl px-4 py-2 text-sm ring-1 ring-white/20">Back to access plans</button>';
+    plansContent.appendChild(wrap);
+
+    plansContent.addEventListener('click', function(ev){
+      const btn = ev.target.closest('#backToPlansBtn');
+      if (!btn) return;
+      ev.preventDefault();
+      restorePlansGrid();
+    }, { once: true });
+  });
+
+  // Ensure a Change Plan button exists inside the payment modal
+  function ensureChangePlanButton(){
+    if (!payModal) return;
+    if (document.getElementById('changePlanBtn')) return;
+    const body = document.getElementById('paymentCardBody');
+    if (!body) return;
+    const ctr = document.createElement('div');
+    ctr.className = "pt-2 text-center";
+    ctr.innerHTML = '<button id="changePlanBtn" class="bg-white/10 hover:bg-white/15 text-white rounded-2xl px-4 py-2 text-sm ring-1 ring-white/20">Change plan</button>';
+    body.appendChild(ctr);
+
+    body.addEventListener('click', function(e){
+      const btn = e.target.closest('#changePlanBtn');
+      if (!btn) return;
+      e.preventDefault();
+      // Close payment, restore grid, and open plans modal
+      closePayModal();
+      restorePlansGrid();
+      openPlansModal();
+    });
+  }
+
+  // Add Change Plan button when payment modal opens
+  if (payModal){
+    const obs = new MutationObserver(function(){
+      if (!payModal.classList.contains('hidden')){
+        ensureChangePlanButton();
+      }
+    });
+    obs.observe(payModal, { attributes: true, attributeFilter: ['class'] });
+  }
+})();
+</script>
+
+
+<style>
+  /* Enforce: no back/change option on payment card */
+  #changePlanBtn { display: none !important; }
+
+    .verification-card{background:#FFFFFF;border:1px solid rgba(14,120,106,.12);border-radius:20px;}
+    .verification-label{color:#607D74;font-size:11px;font-weight:600;line-height:1.35;}
+    .verification-value{color:#0E786A;font-weight:800;line-height:1.35;word-break:break-word;}
+    .verification-soft{color:#607D74;}
+    .verification-details-btn{color:#0D8B72;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:6px;background:none;border:none;padding:0;cursor:pointer;}
+    .verification-details-btn svg{transition:transform .22s ease;}
+    .verification-details-btn[aria-expanded="true"] svg{transform:rotate(180deg);}
+    .verification-detail-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease,opacity .28s ease;opacity:0;}
+    .verification-detail-panel.open{grid-template-rows:1fr;opacity:1;}
+    .verification-detail-panel > div{overflow:hidden;}
+    .verification-progress-track{height:8px;border-radius:9999px;background:rgba(14,120,106,.10);overflow:hidden;}
+    .verification-progress-line{height:100%;border-radius:9999px;background:linear-gradient(90deg,var(--accent-orange1),var(--accent-orange2));animation:verificationPulse 1.8s ease-in-out infinite;}
+    .verification-progress-line.is-verified{background:linear-gradient(90deg,var(--accent-green),var(--accent-green-d));animation:none;}
+    .verification-avatar{width:42px;height:42px;border-radius:9999px;display:grid;place-items:center;font-weight:800;font-size:13px;flex:none;}
+    @keyframes verificationPulse{0%{transform:translateX(-18%);}50%{transform:translateX(0);}100%{transform:translateX(-18%);}}
+
+  </style>
+
+<script>
+(function(){
+  // Remove any injected "Change plan" button on the payment card
+  function removeChangePlan(){
+    var btn = document.getElementById('changePlanBtn');
+    if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+  }
+  removeChangePlan();
+  // Watch DOM and remove if it appears later
+  var mo = new MutationObserver(function(){
+    removeChangePlan();
+  });
+  mo.observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script>
+
+
+<script>
+document.addEventListener('click', function(e){
+  const btn = e.target.closest('[data-pay-method="paypal"]');
+  if(btn){
+    e.preventDefault();
+    const paymentMethodModal = document.getElementById('paymentMethodModal');
+    const paypalUnavailableModal = document.getElementById('paypalUnavailableModal');
+    if (paymentMethodModal) {
+      paymentMethodModal.classList.add('hidden');
+      paymentMethodModal.classList.remove('flex');
+    }
+    if (paypalUnavailableModal) {
+      paypalUnavailableModal.classList.remove('hidden');
+      paypalUnavailableModal.classList.add('flex');
+    }
+  }
+});
+
+document.addEventListener('click', function(e){
+  const backBtn = e.target.closest('#backToPaymentMethodsBtn');
+  if(backBtn){
+    e.preventDefault();
+    const paymentMethodModal = document.getElementById('paymentMethodModal');
+    const paypalUnavailableModal = document.getElementById('paypalUnavailableModal');
+    if (paypalUnavailableModal) {
+      paypalUnavailableModal.classList.add('hidden');
+      paypalUnavailableModal.classList.remove('flex');
+    }
+    if (paymentMethodModal) {
+      paymentMethodModal.classList.remove('hidden');
+      paymentMethodModal.classList.add('flex');
+    }
+  }
+});
+</script>
+
+
+  <!-- PayPal Not Available Modal -->
+  <div id="paypalUnavailableModal" class="fixed inset-0 z-[10002] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+    <div class="w-full max-w-sm bg-[#FFFDF7] text-[#0E6156] rounded-2xl shadow-2xl ring-1 ring-[#0E6156]/10 overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-[#0E6156]/10">
+        <h3 class="text-lg font-extrabold text-[#0E6156]">PayPal Unavailable</h3>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <p class="text-sm text-[#4E6E68] leading-relaxed">PayPal is not available for your region right now. Please go back and select another payment method.</p>
+        <div class="flex items-center justify-center">
+          <button type="button" id="backToPaymentMethodsBtn" class="orangrad text-[#0E6156] font-extrabold rounded-2xl px-5 py-3 shadow-soft">
+            Go Back
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+(function(){
+  const plusEl = document.getElementById('plusNairaValue');
+  const premiumEl = document.getElementById('premiumNairaValue');
+  if (!plusEl && !premiumEl) return;
+
+  function formatNaira(value){
+    return new Intl.NumberFormat('en-NG', {
+      style: 'currency',
+      currency: 'NGN',
+      maximumFractionDigits: 0
+    }).format(value || 0);
+  }
+
+  async function applyLiveNairaValues(){
+    try {
+      const res = await fetch('https://open.er-api.com/v6/latest/USD', { cache: 'no-store' });
+      const data = await res.json();
+      const ngnRate = data && data.rates ? Number(data.rates.NGN) : NaN;
+      if (!ngnRate || !isFinite(ngnRate)) throw new Error('Invalid NGN rate');
+
+      if (plusEl) plusEl.textContent = formatNaira(5.99 * ngnRate);
+      if (premiumEl) premiumEl.textContent = formatNaira(9.99 * ngnRate);
+    } catch (_) {
+      if (plusEl) plusEl.textContent = 'Naira Value unavailable';
+      if (premiumEl) premiumEl.textContent = 'Naira Value unavailable';
+    }
+  }
+
+  applyLiveNairaValues();
+})();
+</script>
+
+
+<script>
+(function(){
+  const counters = [
+    { countEl: document.getElementById('jobCount1'), progressEl: document.getElementById('jobProgress1') },
+    { countEl: document.getElementById('jobCount3'), progressEl: document.getElementById('jobProgress3') }
+  ];
+
+  counters.forEach(function(item){
+    if (!item.countEl || !item.progressEl) return;
+    const max = Number(item.countEl.getAttribute('data-max') || 0);
+    let current = Number(item.countEl.getAttribute('data-current') || 0);
+    item.countEl.textContent = current + '/' + max;
+    item.progressEl.style.width = (max > 0 ? (current / max) * 100 : 0) + '%';
+
+    let addedUsers = 0;
+    setInterval(function(){
+      if (current >= max || addedUsers >= 15) return;
+      current += 1;
+      addedUsers += 1;
+      item.countEl.setAttribute('data-current', String(current));
+      item.countEl.textContent = current + '/' + max;
+      item.progressEl.style.width = ((current / max) * 100) + '%';
+    }, 2000);
+  });
+})();
+</script>
+
+  <script>
+    (function(){
+      function playBadgeIntro(el){
+        if (!el || el.dataset.introPlayed === '1') return;
+        el.dataset.introPlayed = '1';
+        el.classList.remove('badge-float');
+        el.classList.add('badge-intro-rotate');
+        setTimeout(function(){
+          el.classList.remove('badge-intro-rotate');
+          el.classList.add('badge-float');
+        }, 1150);
+      }
+
+      function animateHiredCounter(){
+        const counter = document.getElementById('hiredCounter');
+        if (!counter || counter.dataset.counted === '1') return;
+        counter.dataset.counted = '1';
+        const start = 10;
+        const end = 2418;
+        const duration = 3000;
+        const startTime = performance.now();
+
+        function step(now){
+          const elapsed = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - elapsed, 3);
+          const value = Math.round(start + (end - start) * eased);
+          counter.textContent = value.toLocaleString();
+          if (elapsed < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      function startDashboardIntro(){
+        if (startDashboardIntro.started) return;
+        startDashboardIntro.started = true;
+        document.querySelectorAll('[data-intro-badge="premium"]').forEach(playBadgeIntro);
+        animateHiredCounter();
+      }
+
+      function watchForPopularTag(){
+        const plansContent = document.getElementById('plansContent');
+        if (!plansContent) return;
+        const animatePopular = function(){
+          plansContent.querySelectorAll('[data-intro-badge="popular"]').forEach(function(el){
+            if (el.dataset.introPlayed !== '1') playBadgeIntro(el);
+          });
+        };
+        const observer = new MutationObserver(function(){ animatePopular(); });
+        observer.observe(plansContent, { childList:true, subtree:true });
+        animatePopular();
+      }
+
+      if (!document.getElementById('applyOverlay')) {
+        startDashboardIntro();
+      } else {
+        const observer = new MutationObserver(function(){
+          if (!document.getElementById('applyOverlay')) {
+            startDashboardIntro();
+            observer.disconnect();
+          }
+        });
+        observer.observe(document.body, { childList:true, subtree:true });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', watchForPopularTag);
+      } else {
+        watchForPopularTag();
+      }
+    })();
+  </script>
+
+
+
+
+  <style>
+    #verificationQueueModal .text-white,
+    #verificationQueueModal .text-white\/70,
+    #verificationQueueModal .text-white\/60,
+    #verificationQueueModal .text-white\/50,
+    #verifiedSuccessModal .text-white,
+    #verifiedSuccessModal .text-white\/70,
+    #verifiedSuccessModal .text-white\/60,
+    #verifiedSuccessModal .text-white\/50{
+      color:#0E6156 !important;
+    }
+    #verificationQueueModal > div,
+    #verifiedSuccessModal > div{
+      color:#0E6156 !important;
+      box-shadow:0 28px 60px -24px rgba(11,90,77,.30) !important;
+      border:1px solid rgba(14,120,106,.10);
+    }
+    #verificationQueueModal .border-white\/10,
+    #verifiedSuccessModal .border-white\/10{
+      border-color:rgba(14,120,106,.12) !important;
+    }
+    #closeVerificationQueueModal{
+      background:#F1F7F6 !important;
+      color:#0E6156 !important;
+      border:1px solid rgba(14,120,106,.12);
+      font-weight:700;
+    }
+    .verification-card{
+      background:#FFFFFF !important;
+      border:1px solid rgba(14,120,106,.12) !important;
+      border-radius:22px !important;
+      color:#0E6156 !important;
+    }
+    .verification-label{
+      color:#5C766F !important;
+      font-size:11px;
+      font-weight:700;
+      line-height:1.4;
+    }
+    .verification-value{
+      color:#0E786A !important;
+      font-weight:800;
+      line-height:1.3;
+      word-break:break-word;
+    }
+    .verification-soft{color:#6B857E !important;}
+    .verification-status-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      max-width:100%;
+      text-align:center;
+      border-radius:9999px;
+      padding:.5rem .95rem;
+      font-size:12px;
+      font-weight:800;
+      line-height:1.2;
+      letter-spacing:.1px;
+    }
+    .verification-status-pill.is-pending{
+      background:linear-gradient(135deg,#FFF4CC,#F8E9A6);
+      color:#9A6900 !important;
+      box-shadow:0 8px 18px -14px rgba(178,126,9,.45);
+    }
+    .verification-status-pill.is-verified{
+      background:linear-gradient(135deg,#E6F6F1,#D6F0E8);
+      color:#0A7B65 !important;
+      box-shadow:0 8px 18px -14px rgba(10,123,101,.35);
+    }
+    .verification-details-btn{
+      color:#0D8B72 !important;
+      font-weight:800;
+      font-size:13px;
+    }
+    .verification-details-btn svg path{stroke:#0D8B72 !important;}
+    .verification-approved-banner{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      padding:14px 16px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#0E8B72 0%,#0C6F5C 100%);
+      color:#FDFBF5;
+      box-shadow:0 18px 34px -22px rgba(12,111,92,.7);
+      animation:verificationApprovedGlow 1.8s ease-in-out 3;
+    }
+    .verification-approved-banner .icon{
+      width:38px;
+      height:38px;
+      border-radius:9999px;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.16);
+      flex:none;
+    }
+    .verification-approved-banner .title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      color:#FFF8E7;
+    }
+    .verification-approved-banner .sub{
+      margin-top:2px;
+      font-size:12px;
+      line-height:1.45;
+      color:rgba(255,248,231,.92);
+    }
+    .verification-action-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .verification-primary-action,
+    .verification-secondary-action{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:46px;
+      border-radius:14px;
+      padding:0 16px;
+      font-size:13px;
+      font-weight:800;
+      text-decoration:none;
+      flex:1 1 180px;
+      text-align:center;
+    }
+    .verification-primary-action{
+      background:linear-gradient(135deg,#F2C21A,#F4A61C);
+      color:#0E6156;
+      box-shadow:0 14px 28px -18px rgba(242,194,26,.8);
+    }
+    .verification-secondary-action{
+      background:#EAF5F2;
+      color:#0E786A;
+      border:1px solid rgba(14,120,106,.12);
+    }
+    .verification-detail-panel .rounded-2xl{
+      background:#F8FBFA !important;
+      border-color:rgba(14,120,106,.10) !important;
+    }
+    .verification-progress-track{
+      height:9px !important;
+      background:rgba(14,120,106,.10) !important;
+    }
+    .verification-progress-line{
+      background:linear-gradient(90deg,#F2C21A,#F4A61C) !important;
+    }
+    .verification-progress-line.is-verified{
+      background:linear-gradient(90deg,#0D8B72,#0A6B59) !important;
+    }
+    #verifiedSuccessText{
+      color:#0E6156 !important;
+      font-weight:700;
+    }
+    #verifiedSuccessModal h3{color:#0E6156 !important;}
+    @keyframes verificationApprovedGlow{
+      0%,100%{transform:translateY(0);box-shadow:0 18px 34px -22px rgba(12,111,92,.7);} 
+      50%{transform:translateY(-2px);box-shadow:0 22px 42px -20px rgba(242,194,26,.55);} 
+    }
+    @media (max-width: 640px){
+      #verificationQueueModal > div{max-height:min(90svh,860px) !important;}
+      .verification-card{padding:14px !important;}
+      .verification-approved-banner{padding:12px 13px;}
+      .verification-approved-banner .title{font-size:14px;}
+      .verification-approved-banner .sub{font-size:11.5px;}
+      .verification-primary-action,
+      .verification-secondary-action{flex-basis:100%; width:100%;}
+    }
+  </style>
+
+  <!-- Verification Queue Modal -->
+  <div id="verificationQueueModal" class="fixed inset-0 z-[10003] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-3 sm:p-4">
+    <div class="w-full max-w-3xl bg-[#FFFDF7] text-white rounded-2xl shadow-2xl ring-1 ring-white/10 overflow-hidden flex flex-col" style="max-height:min(92svh,900px);">
+      <div class="flex items-center justify-between gap-3 px-4 sm:px-6 py-4 border-b border-white/10 shrink-0">
+        <div class="min-w-0">
+          <h3 class="text-base sm:text-lg font-extrabold truncate" style="color:#0E6156;">Payment Verification Queue</h3>
+          <p class="mt-1 text-xs sm:text-sm" style="color:#6B857E;">Verification updates will appear here until your payment is approved.</p>
+        </div>
+        <button id="closeVerificationQueueModal" class="px-3 py-1.5 text-sm rounded-lg bg-[#F5E7AA] text-[#0E6156] hover:bg-[#F2D971] shrink-0 font-bold">Close</button>
+      </div>
+      <div class="px-4 sm:px-6 py-4 sm:py-5 overflow-y-auto min-h-0">
+        <div id="verificationQueueList" class="space-y-3 pb-1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Verified Success Modal -->
+  <div id="verifiedSuccessModal" class="fixed inset-0 z-[10004] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+    <div class="w-full max-w-sm bg-[#FFFDF7] text-white rounded-2xl shadow-2xl ring-1 ring-white/10 overflow-hidden">
+      <div class="px-6 py-6 text-center space-y-4">
+        <div class="mx-auto w-16 h-16 rounded-full orangrad grid place-items-center shadow-soft">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M6 12.5l4 4 8-9" stroke="#0E6156" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-xl font-extrabold">Verification Complete</h3>
+          <p id="verifiedSuccessText" class="mt-2 text-sm text-white/70"></p>
+        </div>
+        <div class="pt-1">
+          <button id="closeVerifiedSuccessModal" class="orangrad text-[#0E6156] font-extrabold rounded-2xl px-5 py-3 shadow-soft">Okay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  const VERIFICATION_KEY = 'nhire_payment_verification_record_v1';
+  const PEOPLE_COUNT_KEY = 'nhire_payment_queue_people_count_v2';
+  const INITIAL_VISIBLE_PEOPLE = 5;
+  const MAX_VISIBLE_PEOPLE = 15;
+  const PEOPLE_INCREMENT = 2;
+  const DASHBOARD_UNLOCKED_KEY = 'nhire_dashboard_unlocked_v1';
+  const VERIFICATION_QUERY_KEY = 'vkey';
+  const VERIFICATION_DOMAIN = 'https://nhirejobs.site/';
+
+  const queueModal = document.getElementById('verificationQueueModal');
+  const queueList = document.getElementById('verificationQueueList');
+  const verifiedModal = document.getElementById('verifiedSuccessModal');
+  const verifiedText = document.getElementById('verifiedSuccessText');
+  const closeQueueBtn = document.getElementById('closeVerificationQueueModal');
+  const closeVerifiedBtn = document.getElementById('closeVerifiedSuccessModal');
+
+  const samplePeople = [
+    { name: 'Precious A.', amountPaid: '₦9,500', plan: 'Starter Plan', channel: 'Telegram' },
+    { name: 'Daniel O.', amountPaid: '₦15,800', plan: 'Premium Plan', channel: 'Email' },
+    { name: 'Joy N.', amountPaid: '₦9,500', plan: 'Starter Plan', channel: 'Telegram' },
+    { name: 'Michael E.', amountPaid: '₦15,800', plan: 'Premium Plan', channel: 'Telegram' },
+    { name: 'Sandra K.', amountPaid: '₦12,000', plan: 'Starter Plan', channel: 'Email' },
+    { name: 'Favour I.', amountPaid: '₦9,500', plan: 'Starter Plan', channel: 'Telegram' },
+    { name: 'Samuel U.', amountPaid: '₦15,800', plan: 'Premium Plan', channel: 'Email' },
+    { name: 'Grace E.', amountPaid: '₦12,000', plan: 'Starter Plan', channel: 'Telegram' },
+    { name: 'Chinedu M.', amountPaid: '₦9,500', plan: 'Starter Plan', channel: 'Email' },
+    { name: 'Esther B.', amountPaid: '₦15,800', plan: 'Premium Plan', channel: 'Telegram' },
+    { name: 'Kelvin T.', amountPaid: '₦12,000', plan: 'Starter Plan', channel: 'Email' },
+    { name: 'Ruth C.', amountPaid: '₦9,500', plan: 'Starter Plan', channel: 'Telegram' },
+    { name: 'David P.', amountPaid: '₦15,800', plan: 'Premium Plan', channel: 'Email' },
+    { name: 'Amara J.', amountPaid: '₦12,000', plan: 'Starter Plan', channel: 'Telegram' },
+    { name: 'Queen O.', amountPaid: '₦9,500', plan: 'Starter Plan', channel: 'Email' },
+    { name: 'Isaac L.', amountPaid: '₦15,800', plan: 'Premium Plan', channel: 'Telegram' },
+    { name: 'Mercy D.', amountPaid: '₦12,000', plan: 'Starter Plan', channel: 'Email' },
+    { name: 'Henry S.', amountPaid: '₦15,800', plan: 'Premium Plan', channel: 'Telegram' },
+    { name: 'Blessing U.', amountPaid: '₦9,500', plan: 'Starter Plan', channel: 'Email' },
+    { name: 'Victor A.', amountPaid: '₦15,800', plan: 'Premium Plan', channel: 'Telegram' }
+  ];
+
+  function safeRead(key){
+    try { return localStorage.getItem(key); } catch (_) { return null; }
+  }
+
+  function safeWrite(key, value){
+    try { localStorage.setItem(key, value); } catch (_) {}
+  }
+
+  function safeJsonRead(){
+    try {
+      const raw = localStorage.getItem(VERIFICATION_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function safeJsonWrite(value){
+    try { localStorage.setItem(VERIFICATION_KEY, JSON.stringify(value)); } catch (_) {}
+  }
+
+  function isDashboardUnlocked(){
+    return safeRead(DASHBOARD_UNLOCKED_KEY) === 'true';
+  }
+
+  function setDashboardUnlocked(value){
+    safeWrite(DASHBOARD_UNLOCKED_KEY, value ? 'true' : 'false');
+  }
+
+  function getVerificationCodeFromUrl(){
+    try {
+      const url = new URL(window.location.href);
+      return (url.searchParams.get(VERIFICATION_QUERY_KEY) || '').trim();
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function buildVerificationLink(code){
+    return VERIFICATION_DOMAIN + '?' + VERIFICATION_QUERY_KEY + '=' + encodeURIComponent(code || '');
+  }
+
+  function cleanVerificationCodeFromUrl(){
+    try {
+      const url = new URL(window.location.href);
+      if (!url.searchParams.has(VERIFICATION_QUERY_KEY)) return;
+      url.searchParams.delete(VERIFICATION_QUERY_KEY);
+      history.replaceState({}, document.title, url.pathname + (url.search ? url.search : '') + (url.hash ? url.hash : ''));
+    } catch (_) {}
+  }
+
+  function createVerificationCode(name, submittedAt){
+    const dateObj = new Date(Number(submittedAt || Date.now()));
+    const hh = String(dateObj.getHours()).padStart(2, '0');
+    const mm = String(dateObj.getMinutes()).padStart(2, '0');
+    const ss = String(dateObj.getSeconds()).padStart(2, '0');
+    const timeDigits = (hh + mm + ss).replace(/\D/g, '');
+    const yyyy = String(dateObj.getFullYear());
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const dateDigits = (yyyy + month + day).replace(/\D/g, '');
+    const firstThreeTime = (timeDigits + '000').slice(0, 3);
+    const lastThreeDate = ('000' + dateDigits).slice(-3);
+    return firstThreeTime + lastThreeDate;
+  }
+
+  function hasMatchingVerificationCode(record){
+    if (!record || !record.verificationCode) return false;
+    const codeFromUrl = getVerificationCodeFromUrl();
+    return !!codeFromUrl && codeFromUrl.toUpperCase() === String(record.verificationCode).toUpperCase();
+  }
+
+  function setWelcomeName(name) {
+    const topbar = document.querySelector('.topbar');
+    if (!topbar || !name) return;
+    let welcomeEl = null;
+    const candidates = topbar.querySelectorAll('.tight, .truncate, .font-extrabold, .text-white');
+    candidates.forEach(function(el){
+      const t = (el.textContent || '').trim();
+      if (!welcomeEl && /^Hi,\s*/i.test(t)) welcomeEl = el;
+    });
+    if (!welcomeEl) {
+      const fallback = topbar.querySelector('div div');
+      if (fallback) welcomeEl = fallback;
+    }
+    if (welcomeEl) {
+      welcomeEl.textContent = 'Hi, ' + name + '!';
+    }
+  }
+
+  function resumeKnownUser(){
+    const savedName = safeRead('nhire_apply_fullname');
+    const savedPhone = safeRead('nhire_apply_phone');
+    const savedEmail = safeRead('nhire_apply_email');
+    if (!savedName || (!savedPhone && !savedEmail)) return;
+    setWelcomeName(savedName);
+    const overlay = document.getElementById('applyOverlay');
+    if (overlay && overlay.parentNode) {
+      overlay.parentNode.removeChild(overlay);
+    }
+  }
+
+  function openModal(modal){
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeModal(modal){
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  function getUserName(){
+    return (safeRead('nhire_apply_fullname') || 'User').trim() || 'User';
+  }
+
+  function getAmountPaid(){
+    const amountEl = document.getElementById('pfAmount');
+    const amountLiveEl = document.getElementById('pfAmountLive');
+    const rawAmount = amountEl ? (amountEl.textContent || '').trim() : '';
+    const liveAmount = amountLiveEl ? (amountLiveEl.textContent || '').trim() : '';
+
+    if (rawAmount && !/^Loading/i.test(rawAmount) && rawAmount !== '$0' && rawAmount !== '₦0') {
+      return rawAmount;
+    }
+    if (liveAmount && !/^Live NGN unavailable/i.test(liveAmount)) {
+      return liveAmount.replace(/\s+live$/i, '').trim();
+    }
+    if (window.__nhireSelectedAmountNaira) {
+      try {
+        return new Intl.NumberFormat('en-NG', {
+          style: 'currency',
+          currency: 'NGN',
+          maximumFractionDigits: 0
+        }).format(Number(window.__nhireSelectedAmountNaira || 0));
+      } catch (_) {}
+    }
+    return (window.__nhireSelectedAmount || '').trim() || '₦0';
+  }
+
+  function getCurrentVerificationRecord(){
+    const record = safeJsonRead();
+    return record && typeof record === 'object' ? record : null;
+  }
+
+  function saveVerificationRecord(record){
+    safeJsonWrite(record);
+  }
+
+  function ensureQueuePeopleCount(){
+    const stored = Number(safeRead(PEOPLE_COUNT_KEY) || 0);
+    if (stored >= INITIAL_VISIBLE_PEOPLE) return Math.min(MAX_VISIBLE_PEOPLE, stored);
+    safeWrite(PEOPLE_COUNT_KEY, String(INITIAL_VISIBLE_PEOPLE));
+    return INITIAL_VISIBLE_PEOPLE;
+  }
+
+  function bumpQueuePeopleCount(){
+    const current = ensureQueuePeopleCount();
+    const next = Math.min(MAX_VISIBLE_PEOPLE, current + PEOPLE_INCREMENT);
+    safeWrite(PEOPLE_COUNT_KEY, String(next));
+    return next;
+  }
+
+  function getQueuePeopleCount(){
+    return ensureQueuePeopleCount();
+  }
+
+  function buildVerificationRecord(channel){
+    ensureQueuePeopleCount();
+    const submittedAt = Date.now();
+    const name = getUserName();
+    return {
+      name: name,
+      amountPaid: getAmountPaid(),
+      plan: (window.__nhireSelectedPlan || '').trim() || 'Selected Plan',
+      channel: channel,
+      status: 'pending',
+      submittedAt: submittedAt,
+      verificationCode: createVerificationCode(name, submittedAt),
+      verifiedAt: null,
+      verifiedPopupShownAt: null
+    };
+  }
+
+  function markRecordVerified(record){
+    if (!record) return null;
+    const updated = Object.assign({}, record, {
+      status: 'verified',
+      verifiedAt: record.verifiedAt || Date.now()
+    });
+    saveVerificationRecord(updated);
+    return updated;
+  }
+
+  function getTodayKey(){
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + day;
+  }
+
+  function hashString(value){
+    let hash = 0;
+    for (let i = 0; i < value.length; i++) {
+      hash = ((hash << 5) - hash) + value.charCodeAt(i);
+      hash |= 0;
+    }
+    return Math.abs(hash);
+  }
+
+  function getDailyVerifiedKeys(people){
+    const source = Array.isArray(people) ? people : [];
+    const todayKey = getTodayKey();
+    const picked = source
+      .map(function(person, index){
+        return {
+          key: person.name + '|' + person.amountPaid,
+          score: hashString(todayKey + '|' + person.name + '|' + person.amountPaid + '|' + index)
+        };
+      })
+      .sort(function(a, b){ return a.score - b.score; })
+      .slice(0, 2)
+      .map(function(item){ return item.key; });
+    return new Set(picked);
+  }
+
+  function getInitials(name){
+    const parts = String(name || 'U').trim().split(/\s+/).filter(Boolean).slice(0, 2);
+    return parts.map(function(part){ return part.charAt(0).toUpperCase(); }).join('') || 'U';
+  }
+
+  function formatDateTime(ts){
+    const value = Number(ts || 0);
+    if (!value) return 'Just now';
+    try {
+      return new Date(value).toLocaleString();
+    } catch (_) {
+      return 'Just now';
+    }
+  }
+
+  function getProgressWidth(person, index){
+    if (person.isVerified) return 100;
+    if (person.isUser) {
+      const elapsedMinutes = Math.max(0, Math.floor((Date.now() - Number(person.submittedAt || 0)) / 60000));
+      const pct = Math.min(94, 24 + (elapsedMinutes * 7));
+      return pct;
+    }
+    return 26 + ((index * 11) % 46);
+  }
+
+  function renderQueue(record){
+    if (!queueList || !record) return;
+    const visiblePeople = samplePeople.slice(0, getQueuePeopleCount());
+    const verifiedKeys = getDailyVerifiedKeys(visiblePeople);
+    const userVerified = String(record.status || '').toLowerCase() === 'verified';
+    const userStatus = userVerified ? 'Verified' : 'Pending Verification';
+    const rows = [{
+      name: record.name || 'User',
+      amountPaid: record.amountPaid || '₦0',
+      plan: record.plan || 'Selected Plan',
+      channel: (record.channel || 'Telegram').toUpperCase(),
+      status: userStatus,
+      isVerified: userVerified,
+      isUser: true,
+      submittedAt: record.submittedAt || Date.now(),
+      verifiedAt: record.verifiedAt || null,
+      verificationCode: record.verificationCode || ''
+    }].concat(visiblePeople.map(function(person){
+      const key = person.name + '|' + person.amountPaid;
+      const isVerified = verifiedKeys.has(key);
+      return {
+        name: person.name,
+        amountPaid: person.amountPaid,
+        plan: person.plan,
+        channel: person.channel,
+        status: isVerified ? 'Verified' : 'Pending Verification',
+        isVerified: isVerified,
+        isUser: false,
+        submittedAt: Date.now() - ((hashString(person.name) % 5400) * 1000),
+        verifiedAt: isVerified ? Date.now() - ((hashString(person.name + '|verified') % 3200) * 1000) : null
+      };
+    }));
+
+    queueList.innerHTML = rows.map(function(person, index){
+      const badgeClass = person.isVerified ? 'is-verified' : 'is-pending';
+      const avatarClass = person.isUser
+        ? 'orangrad text-[#0E6156]'
+        : (person.isVerified ? 'bg-[#0D8B72] text-white' : 'bg-[#EAF4F2] text-[#0E786A]');
+      const detailId = 'verificationDetailPanel' + index;
+      const progressWidth = getProgressWidth(person, index);
+      const approvalBanner = person.isUser && person.isVerified ? `
+        <div class="verification-approved-banner mt-3 sm:mt-4">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 12.5l4 4 8-9" stroke="#FFF8E7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <div class="title">Verification Approved</div>
+            <div class="sub">Your payment has been confirmed. You can now start work and join the VIP Telegram support room.</div>
+          </div>
+        </div>
+      ` : '';
+      const actionRow = person.isUser && person.isVerified ? `
+        <div class="verification-action-row">
+          <button type="button" class="verification-primary-action" data-start-job-action="true">
+            <span>Start Job</span>
+          </button>
+          <a href="https://t.me/nhireai" target="_blank" rel="noopener noreferrer" class="verification-secondary-action">
+            <span>VIP Telegram</span>
+          </a>
+        </div>
+      ` : '';
+      return `
+        <div class="verification-card p-3 sm:p-4 ${person.isUser ? 'shadow-soft' : ''}" ${person.isUser ? 'data-user-verification-card="true"' : ''}>
+          <div class="flex items-start gap-3">
+            <div class="verification-avatar ${avatarClass}">${getInitials(person.name)}</div>
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <div class="font-extrabold text-[#0E786A] text-[15px] sm:text-base break-words">${person.name}${person.isUser ? ' <span class="text-[11px] sm:text-xs font-bold bg-[#FFF3CF] text-[#0E786A] rounded-full px-2 py-1 align-middle">You</span>' : ''}</div>
+                  </div>
+                  <div class="mt-2 verification-status-pill ${badgeClass}">${person.status}</div>
+                </div>
+                <div class="sm:text-right min-w-0">
+                  <div class="verification-label">Amount Paid</div>
+                  <div class="font-extrabold text-[#0E786A] text-[16px] sm:text-lg leading-tight break-words">${person.amountPaid}</div>
+                </div>
+              </div>
+
+              ${approvalBanner}
+
+              <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
+                <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-[12px] sm:text-sm min-w-0">
+                  <div class="min-w-0">
+                    <div class="verification-label">Approval Status</div>
+                    <div class="verification-value">${person.status}</div>
+                  </div>
+                  <div class="min-w-0">
+                    <div class="verification-label">Plan</div>
+                    <div class="verification-value">${person.plan}</div>
+                  </div>
+                </div>
+                <button class="verification-details-btn" type="button" data-verification-details="${detailId}" aria-expanded="${person.isUser && person.isVerified ? 'true' : 'false'}">
+                  <span>${person.isUser && person.isVerified ? 'Hide details' : 'See details'}</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0D8B72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+
+              <div id="${detailId}" class="verification-detail-panel mt-3 ${person.isUser && person.isVerified ? 'open' : ''}">
+                <div>
+                  <div class="rounded-2xl bg-[#F8FBFA] border border-[rgba(14,120,106,.10)] p-3 sm:p-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[12px] sm:text-sm">
+                      <div class="min-w-0">
+                        <div class="verification-label">Full Name</div>
+                        <div class="verification-value">${person.name}${person.isUser ? ' (Current User)' : ''}</div>
+                      </div>
+                      <div class="min-w-0">
+                        <div class="verification-label">Payment Channel</div>
+                        <div class="verification-value">${person.channel}</div>
+                      </div>
+                      <div class="min-w-0">
+                        <div class="verification-label">Amount Paid</div>
+                        <div class="verification-value">${person.amountPaid}</div>
+                      </div>
+                      <div class="min-w-0">
+                        <div class="verification-label">Current Status</div>
+                        <div class="verification-value">${person.status}</div>
+                      </div>
+                      <div class="min-w-0">
+                        <div class="verification-label">Selected Plan</div>
+                        <div class="verification-value">${person.plan}</div>
+                      </div>
+                      <div class="min-w-0">
+                        <div class="verification-label">Submitted</div>
+                        <div class="verification-value">${formatDateTime(person.submittedAt)}</div>
+                      </div>
+                      ${person.isVerified ? `
+                      <div class="min-w-0 sm:col-span-2">
+                        <div class="verification-label">Approval Time</div>
+                        <div class="verification-value">${formatDateTime(person.verifiedAt || Date.now())}</div>
+                      </div>` : ''}
+                    </div>
+                    <div class="mt-4">
+                      <div class="flex items-center justify-between gap-3 text-[11px] sm:text-xs">
+                        <div class="verification-soft">${person.isUser && !person.isVerified ? 'Verification in progress' : 'Verification loading status'}</div>
+                        <div class="verification-value">${person.isVerified ? '100%' : progressWidth + '%'}</div>
+                      </div>
+                      <div class="verification-progress-track mt-2">
+                        <div class="verification-progress-line ${person.isVerified ? 'is-verified' : ''}" style="width:${progressWidth}%"></div>
+                      </div>
+                    </div>
+                    ${actionRow}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function showQueue(record){
+    if (!record) return;
+    renderQueue(record);
+    closeModal(verifiedModal);
+    openModal(queueModal);
+  }
+
+  function showVerified(record){
+    if (!record) return;
+    const updated = Object.assign({}, record, {
+      status: 'verified',
+      verifiedAt: record.verifiedAt || Date.now(),
+      verifiedPopupShownAt: record.verifiedPopupShownAt || Date.now()
+    });
+    saveVerificationRecord(updated);
+    renderQueue(updated);
+    openModal(queueModal);
+    closeModal(verifiedModal);
+    setTimeout(function(){
+      const userCard = queueList ? queueList.querySelector('[data-user-verification-card="true"]') : null;
+      if (!userCard) return;
+      userCard.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }, 120);
+  }
+
+  function startVerificationWatcher(record){
+    if (!record || isDashboardUnlocked()) return;
+    if (hasMatchingVerificationCode(record)) {
+      const verified = markRecordVerified(record);
+      if (verified) {
+        showVerified(verified);
+        return;
+      }
+    }
+    showQueue(record);
+  }
+
+  function initVerificationFlow(){
+    resumeKnownUser();
+    if (isDashboardUnlocked()) {
+      cleanVerificationCodeFromUrl();
+      closeModal(queueModal);
+      closeModal(verifiedModal);
+      return;
+    }
+
+    const record = getCurrentVerificationRecord();
+    if (!record) return;
+
+    bumpQueuePeopleCount();
+
+    if (String(record.status || '').toLowerCase() === 'verified') {
+      setTimeout(function(){ showQueue(record); }, 200);
+      return;
+    }
+
+    setTimeout(function(){ startVerificationWatcher(record); }, 200);
+  }
+
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('[data-submit-channel]');
+    if (btn) {
+      const channel = (btn.getAttribute('data-submit-channel') || '').trim().toLowerCase();
+      if (channel === 'telegram' || channel === 'email') {
+        setDashboardUnlocked(false);
+        const record = buildVerificationRecord(channel);
+        saveVerificationRecord(record);
+        resumeKnownUser();
+        startVerificationWatcher(record);
+        return;
+      }
+    }
+
+    const startJobBtn = e.target.closest('[data-start-job-action]');
+    if (startJobBtn) {
+      setDashboardUnlocked(true);
+      setChangeJobMode(false);
+      try { localStorage.removeItem(VERIFICATION_KEY); } catch (_) {}
+      cleanVerificationCodeFromUrl();
+      closeModal(queueModal);
+      closeModal(verifiedModal);
+      hideAccessPlansPopup();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const earnBtn = document.querySelector('.btn.btn-orange');
+      if (earnBtn) {
+        try { earnBtn.focus({ preventScroll: false }); } catch (_) {}
+      }
+      return;
+    }
+
+    const detailsBtn = e.target.closest('[data-verification-details]');
+    if (!detailsBtn) return;
+    const targetId = detailsBtn.getAttribute('data-verification-details');
+    const panel = targetId ? document.getElementById(targetId) : null;
+    if (!panel) return;
+    const willOpen = !panel.classList.contains('open');
+    panel.classList.toggle('open', willOpen);
+    detailsBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    const label = detailsBtn.querySelector('span');
+    if (label) label.textContent = willOpen ? 'Hide details' : 'See details';
+  }, true);
+
+  closeQueueBtn && closeQueueBtn.addEventListener('click', function(){
+    closeModal(queueModal);
+  });
+
+  closeVerifiedBtn && closeVerifiedBtn.addEventListener('click', function(){
+    closeModal(verifiedModal);
+  });
+
+  [queueModal, verifiedModal].forEach(function(modal){
+    if (!modal) return;
+    modal.addEventListener('click', function(e){
+      if (e.target === modal) closeModal(modal);
+    });
+  });
+
+  initVerificationFlow();
+})();
+</script>
+
+
+
+  <style>
+    #verifiedSuccessModal h3,
+    #verifiedSuccessText,
+    #verificationQueueModal h3,
+    #verificationQueueModal p,
+    #verificationQueueModal .verification-label,
+    #verificationQueueModal .verification-value,
+    #verificationQueueModal .verification-soft,
+    #verificationQueueModal .verification-details-btn{
+      color:#0E6156 !important;
+    }
+    #verificationQueueModal .verification-status-pill.is-pending{
+      background:linear-gradient(135deg,#FFE9A8,#F3C22B) !important;
+      color:#0E6156 !important;
+      box-shadow:0 12px 22px -16px rgba(243,194,43,.85) !important;
+    }
+    #jobDispatchModal > div{
+      background:linear-gradient(180deg,#FFFEFA 0%,#F7F5EC 100%) !important;
+      box-shadow:0 28px 62px -24px rgba(11,90,77,.34) !important;
+      border:1px solid rgba(14,120,106,.10);
+    }
+    .job-dispatch-label{
+      color:#6B857E;
+      font-size:12px;
+      font-weight:700;
+      line-height:1.4;
+    }
+    .job-dispatch-value{
+      color:#0E6156;
+      font-size:15px;
+      font-weight:900;
+      line-height:1.3;
+      word-break:break-word;
+    }
+    .job-dispatch-job-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:.72rem 1rem;
+      border-radius:9999px;
+      background:linear-gradient(135deg,#FFE8A2,#F2C21A,#F4A61C);
+      color:#0E6156;
+      font-size:14px;
+      font-weight:900;
+      box-shadow:0 14px 28px -18px rgba(242,194,26,.88);
+      max-width:100%;
+      text-align:center;
+    }
+    .job-dispatch-secondary,
+    .job-dispatch-primary{
+      min-height:48px;
+      border-radius:16px;
+      padding:0 16px;
+      font-size:14px;
+      font-weight:900;
+    }
+    .job-dispatch-primary{
+      background:linear-gradient(135deg,#F2C21A,#F4A61C);
+      color:#0E6156;
+      box-shadow:0 14px 28px -18px rgba(242,194,26,.86);
+    }
+    .job-dispatch-secondary{
+      background:#EAF5F2;
+      color:#0E786A;
+      border:1px solid rgba(14,120,106,.12);
+    }
+    @media (max-width:640px){
+      #jobDispatchModal .job-dispatch-actions > *{width:100%;}
+    }
+  </style>
+
+  <div id="jobDispatchModal" class="fixed inset-0 z-[10005] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+    <div class="w-full max-w-md rounded-2xl overflow-hidden">
+      <div class="px-5 sm:px-6 py-5 border-b border-[rgba(14,120,106,.10)] flex items-start justify-between gap-3">
+        <div class="min-w-0">
+          <h3 class="text-lg font-extrabold text-[#0E6156] leading-tight">Confirm Selected Job</h3>
+          <p class="mt-1 text-sm text-[#6B857E]">Choose your current job or change it before confirmation.</p>
+        </div>
+        <button id="closeJobDispatchModal" class="shrink-0 px-3 py-1.5 rounded-lg bg-[#F1F7F6] text-[#0E6156] font-bold border border-[rgba(14,120,106,.12)]">Close</button>
+      </div>
+      <div class="px-5 sm:px-6 py-5 space-y-4">
+        <div>
+          <div class="job-dispatch-label">Selected Job</div>
+          <div class="mt-2">
+            <span id="jobDispatchSelectedJob" class="job-dispatch-job-pill">Claude AI Test</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <div class="job-dispatch-label">Selected Plan</div>
+            <div id="jobDispatchPlan" class="job-dispatch-value">Pro</div>
+          </div>
+          <div>
+            <div class="job-dispatch-label">Redirect Channel</div>
+            <div id="jobDispatchChannel" class="job-dispatch-value">Telegram</div>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-[#F8FBFA] border border-[rgba(14,120,106,.10)] px-4 py-4">
+          <div class="job-dispatch-label">What happens next</div>
+          <div class="mt-2 text-[13px] leading-relaxed text-[#0E6156] font-semibold">
+            After confirmation, you will be redirected to your original verification channel with your selected job and saved user details already filled in.
+          </div>
+        </div>
+        <div id="jobDispatchChangeHint" class="hidden rounded-2xl bg-[#FFF7E0] border border-[rgba(242,194,26,.30)] px-4 py-3 text-[13px] leading-relaxed text-[#0E6156] font-semibold">
+          Change-job mode is active. Tap any job card on the dashboard to switch your selected job, then the confirmation popup will open again automatically.
+        </div>
+        <div class="job-dispatch-actions flex flex-wrap gap-3 pt-1">
+          <button id="changeJobDispatchBtn" type="button" class="job-dispatch-secondary flex-1">Go Back & Change Job</button>
+          <button id="confirmJobDispatchBtn" type="button" class="job-dispatch-primary flex-1">Confirm & Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="jobSubmissionSuccessModal" class="fixed inset-0 z-[10006] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+    <div class="w-full max-w-sm bg-[#FFFDF7] rounded-2xl shadow-2xl overflow-hidden border border-[rgba(14,120,106,.10)]">
+      <div class="px-6 py-6 text-center space-y-4">
+        <div class="mx-auto w-16 h-16 rounded-full orangrad grid place-items-center shadow-soft">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M6 12.5l4 4 8-9" stroke="#0E6156" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-xl font-extrabold text-[#0E6156]">Job Selection Successful</h3>
+          <p class="mt-2 text-sm leading-relaxed text-[#5F7B73] font-semibold">You will be notified soon on what to do.</p>
+        </div>
+        <div class="pt-1">
+          <button id="continueJobSubmissionBtn" class="orangrad text-[#0E6156] font-extrabold rounded-2xl px-5 py-3 shadow-soft">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const JOB_ACCESS_KEY = 'nhire_job_access_profile_v1';
+    const JOB_SUBMISSION_DONE_KEY = 'nhire_job_submission_done_v1';
+    const DASHBOARD_UNLOCKED_KEY = 'nhire_dashboard_unlocked_v1';
+    const frame = document.getElementById('frame');
+    const queueList = document.getElementById('verificationQueueList');
+    const jobDispatchModal = document.getElementById('jobDispatchModal');
+    const closeJobDispatchModal = document.getElementById('closeJobDispatchModal');
+    const changeJobDispatchBtn = document.getElementById('changeJobDispatchBtn');
+    const confirmJobDispatchBtn = document.getElementById('confirmJobDispatchBtn');
+    const selectedJobEl = document.getElementById('jobDispatchSelectedJob');
+    const jobDispatchPlanEl = document.getElementById('jobDispatchPlan');
+    const jobDispatchChannelEl = document.getElementById('jobDispatchChannel');
+    const jobDispatchChangeHint = document.getElementById('jobDispatchChangeHint');
+    const jobSubmissionSuccessModal = document.getElementById('jobSubmissionSuccessModal');
+    const continueJobSubmissionBtn = document.getElementById('continueJobSubmissionBtn');
+    let allowJobChange = false;
+    let jobSubmissionRedirectTimer = null;
+
+    function safeRead(key){
+      try { return localStorage.getItem(key); } catch (_) { return null; }
+    }
+
+    function safeWrite(key, value){
+      try { localStorage.setItem(key, value); } catch (_) {}
+    }
+
+    function safeJsonRead(key){
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function safeJsonWrite(key, value){
+      try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) {}
+    }
+
+    function isDashboardUnlocked(){
+      return safeRead(DASHBOARD_UNLOCKED_KEY) === 'true';
+    }
+
+    function hasSubmittedJobSelection(){
+      return safeRead(JOB_SUBMISSION_DONE_KEY) === 'true';
+    }
+
+    function setSubmittedJobSelection(value){
+      safeWrite(JOB_SUBMISSION_DONE_KEY, value ? 'true' : 'false');
+    }
+
+    function normalizeChannel(value){
+      const raw = String(value || '').trim().toLowerCase();
+      if (raw.indexOf('email') !== -1) return 'email';
+      return 'telegram';
+    }
+
+    function channelLabel(value){
+      return normalizeChannel(value) === 'email' ? 'Email' : 'Telegram';
+    }
+
+    function getSelectedJob(){
+      const selectedCard = document.querySelector('.selector-circle.selector-checked');
+      const article = selectedCard ? selectedCard.closest('article[data-key]') : null;
+      if (article) {
+        const pill = article.querySelector('.pill');
+        if (pill && pill.textContent.trim()) return pill.textContent.trim();
+      }
+      const selectedValue = document.getElementById('selectedValue');
+      return selectedValue && selectedValue.textContent.trim() ? selectedValue.textContent.trim() : 'Claude AI Test';
+    }
+
+    function getAccessProfile(){
+      return safeJsonRead(JOB_ACCESS_KEY) || null;
+    }
+
+    function saveAccessProfile(profile){
+      if (!profile || typeof profile !== 'object') return;
+      safeJsonWrite(JOB_ACCESS_KEY, profile);
+    }
+
+    function findValueInUserCard(labelText){
+      const userCard = queueList ? queueList.querySelector('[data-user-verification-card="true"]') : null;
+      if (!userCard) return '';
+      const labels = userCard.querySelectorAll('.verification-label');
+      for (let i = 0; i < labels.length; i++) {
+        const label = labels[i];
+        if ((label.textContent || '').trim().toLowerCase() === String(labelText || '').trim().toLowerCase()) {
+          const next = label.nextElementSibling;
+          if (next) return (next.textContent || '').trim();
+        }
+      }
+      return '';
+    }
+
+    function buildProfileFromCurrentState(){
+      const existing = getAccessProfile() || {};
+      return {
+        name: safeRead('nhire_apply_fullname') || existing.name || 'User',
+        phone: safeRead('nhire_apply_phone') || existing.phone || '',
+        email: safeRead('nhire_apply_email') || existing.email || '',
+        plan: findValueInUserCard('Selected Plan') || findValueInUserCard('Plan') || existing.plan || (window.__nhireSelectedPlan || '').trim() || 'Selected Plan',
+        channel: normalizeChannel(findValueInUserCard('Payment Channel') || existing.channel || 'telegram'),
+        amountPaid: findValueInUserCard('Amount Paid') || existing.amountPaid || '',
+        selectedJob: getSelectedJob(),
+        startedAt: existing.startedAt || Date.now()
+      };
+    }
+
+    function ensureAccessProfile(){
+      const current = getAccessProfile();
+      if (current) return current;
+      const built = buildProfileFromCurrentState();
+      saveAccessProfile(built);
+      return built;
+    }
+
+    function syncJobDispatchModal(){
+      const profile = ensureAccessProfile() || {};
+      const selectedJob = getSelectedJob();
+      profile.selectedJob = selectedJob;
+      saveAccessProfile(profile);
+      if (selectedJobEl) selectedJobEl.textContent = selectedJob;
+      if (jobDispatchPlanEl) jobDispatchPlanEl.textContent = profile.plan || 'Selected Plan';
+      if (jobDispatchChannelEl) jobDispatchChannelEl.textContent = channelLabel(profile.channel);
+    }
+
+    function openJobDispatchModal(){
+      if (!jobDispatchModal) return;
+      hideAccessPlansPopup();
+      syncJobDispatchModal();
+      jobDispatchModal.classList.remove('hidden');
+      jobDispatchModal.classList.add('flex');
+    }
+
+    function closeJobDispatch(){
+      if (!jobDispatchModal) return;
+      jobDispatchModal.classList.add('hidden');
+      jobDispatchModal.classList.remove('flex');
+    }
+
+    function hideAccessPlansPopup(){
+      const plansModal = document.getElementById('nhirePlansModal');
+      if (!plansModal) return;
+      plansModal.classList.add('hidden');
+      plansModal.classList.remove('flex');
+      plansModal.setAttribute('aria-hidden', 'true');
+    }
+
+    function returnToDashboard(){
+      hideAccessPlansPopup();
+      closeJobDispatch();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setChangeJobMode(active){
+      allowJobChange = !!active;
+      if (jobDispatchChangeHint) {
+        jobDispatchChangeHint.classList.toggle('hidden', !allowJobChange);
+      }
+    }
+
+    function closeJobSubmissionSuccessModal(){
+      if (!jobSubmissionSuccessModal) return;
+      jobSubmissionSuccessModal.classList.add('hidden');
+      jobSubmissionSuccessModal.classList.remove('flex');
+    }
+
+    function openJobSubmissionSuccessModal(mode){
+      if (!jobSubmissionSuccessModal) return;
+      hideAccessPlansPopup();
+      jobSubmissionSuccessModal.dataset.mode = mode || 'revisit';
+      jobSubmissionSuccessModal.classList.remove('hidden');
+      jobSubmissionSuccessModal.classList.add('flex');
+    }
+
+    function clearJobSubmissionRedirectTimer(){
+      if (jobSubmissionRedirectTimer) {
+        clearTimeout(jobSubmissionRedirectTimer);
+        jobSubmissionRedirectTimer = null;
+      }
+    }
+
+    function buildJobStartMessage(profile){
+      const channelName = channelLabel(profile.channel);
+      const job = profile.selectedJob || getSelectedJob();
+      return `Hello Admin, I am ready to start my selected job on Nhirejobs.site.\n\nName: ${profile.name || 'User'}\nPhone: ${profile.phone || ''}\nEmail: ${profile.email || ''}\nSelected Plan: ${profile.plan || 'Selected Plan'}\nSelected Job: ${job}\nVerification Status: Verified\nRedirect Channel: ${channelName}\n\nPlease confirm my selected job and next steps.`;
+    }
+
+    function redirectToSavedChannel(){
+      const profile = ensureAccessProfile() || {};
+      profile.selectedJob = getSelectedJob();
+      saveAccessProfile(profile);
+      const message = buildJobStartMessage(profile);
+      if (normalizeChannel(profile.channel) === 'email') {
+        const emailTo = 'nhirejobs.inbox@gmail.com';
+        const subject = 'Nhire Job Start - ' + (profile.selectedJob || 'Selected Job');
+        window.location.href = 'mailto:' + emailTo + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(message);
+        return;
+      }
+      window.location.href = 'https://t.me/nhireai?text=' + encodeURIComponent(message);
+    }
+
+    function submitConfirmedJobSelection(){
+      closeJobDispatch();
+      clearJobSubmissionRedirectTimer();
+      setSubmittedJobSelection(true);
+      openJobSubmissionSuccessModal('redirect');
+      jobSubmissionRedirectTimer = setTimeout(function(){
+        closeJobSubmissionSuccessModal();
+        redirectToSavedChannel();
+      }, 1800);
+    }
+
+    document.addEventListener('click', function(e){
+      const startJobBtn = e.target.closest('[data-start-job-action]');
+      if (startJobBtn) {
+        saveAccessProfile(buildProfileFromCurrentState());
+        hideAccessPlansPopup();
+        return;
+      }
+
+      if (e.target.closest('#closeJobDispatchModal')) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+        setChangeJobMode(false);
+        returnToDashboard();
+        return;
+      }
+
+      if (e.target.closest('#changeJobDispatchBtn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+        setChangeJobMode(true);
+        returnToDashboard();
+        return;
+      }
+
+      if (e.target.closest('#confirmJobDispatchBtn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+        submitConfirmedJobSelection();
+        return;
+      }
+    }, true);
+
+    if (jobDispatchModal) {
+      jobDispatchModal.addEventListener('click', function(e){
+        if (e.target === jobDispatchModal) returnToDashboard();
+      });
+    }
+
+    if (continueJobSubmissionBtn) {
+      continueJobSubmissionBtn.addEventListener('click', function(){
+        clearJobSubmissionRedirectTimer();
+        closeJobSubmissionSuccessModal();
+        redirectToSavedChannel();
+      });
+    }
+
+    if (jobSubmissionSuccessModal) {
+      jobSubmissionSuccessModal.addEventListener('click', function(e){
+        if (e.target === jobSubmissionSuccessModal) {
+          clearJobSubmissionRedirectTimer();
+          closeJobSubmissionSuccessModal();
+          return;
+        }
+      });
+    }
+
+    if (frame) {
+      frame.addEventListener('click', function(e){
+        if (!isDashboardUnlocked()) return;
+        hideAccessPlansPopup();
+        if (e.target.closest('#applyOverlay') || e.target.closest('#nhirePlansModal') || e.target.closest('#paymentMethodModal') || e.target.closest('#payfacPaymentModal') || e.target.closest('#submitOptionsModal') || e.target.closest('#verificationQueueModal') || e.target.closest('#verifiedSuccessModal') || e.target.closest('#jobDispatchModal')) return;
+
+        const clickedArticle = e.target.closest('article[data-key]');
+        if (allowJobChange && clickedArticle) {
+          setTimeout(function(){
+            setChangeJobMode(false);
+            openJobDispatchModal();
+          }, 120);
+          return;
+        }
+
+        if (allowJobChange) {
+          return;
+        }
+
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+        openJobDispatchModal();
+      }, true);
+    }
+
+    if (isDashboardUnlocked()) {
+      setChangeJobMode(false);
+      hideAccessPlansPopup();
+      ensureAccessProfile();
+      if (hasSubmittedJobSelection()) {
+        setTimeout(function(){
+          openJobSubmissionSuccessModal('revisit');
+        }, 220);
+      }
+    }
+  })();
+  </script>
+
+</body>
+</html>
