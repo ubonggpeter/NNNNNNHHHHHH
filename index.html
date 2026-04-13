@@ -2573,11 +2573,11 @@ document.addEventListener('click', function(e){
                       ${person.isUser ? `
                       <div class="min-w-0 sm:col-span-2">
                         <div class="verification-label">Key to Verification</div>
-                        <div class="verification-value" style="color:#A56B00; font-weight:900; letter-spacing:.4px;">${person.verificationCode || ''}</div>
+                        <div class="verification-value" style="color:#A56B00; font-weight:900; letter-spacing:.4px;"></div>
                       </div>
                       <div class="min-w-0 sm:col-span-2">
                         <div class="verification-label">Verification Link</div>
-                        <a href="${verificationLink}" class="verification-value" style="display:inline-block; color:#0A7B65; text-decoration:underline; word-break:break-all;">${verificationLink}</a>
+                        <a href="#" class="verification-value" style="display:inline-block; color:#0A7B65; text-decoration:underline; word-break:break-all;"></a>
                       </div>` : ''}
                       ${person.isVerified ? `
                       <div class="min-w-0 sm:col-span-2">
